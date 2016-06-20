@@ -1,5 +1,5 @@
-#  Yii2 Base Project Template
-> An Improved Yii 2 Basic Project Template
+#  Yii2 Base Project
+> A Yii 2 Base Project Template
 
 **Features**
 - [Yii framework](http://www.yiiframework.com/) as the PHP MVC framework.
@@ -12,7 +12,7 @@
 Via Composer
 
 ``` bash
-$ composer require cottacush/yii2-base-template
+$ composer require cottacush/yii2-base-project
 ```
 
 
@@ -34,9 +34,9 @@ Sample Virtual Host Config for Apache
 ```apache
 <VirtualHost *:80>
     ServerAdmin admin@example.com
-    DocumentRoot "<WebServer Root Dir>/yii2-base-template/web"
+    DocumentRoot "<WebServer Root Dir>/yii2-base-project/web"
     ServerName local.yii2-base-template.com
-    <Directory <WebServer Root Dir>/yii2-base-template/web>
+    <Directory <WebServer Root Dir>/yii2-base-project/web>
        AllowOverride all
        Options -MultiViews
       Require all granted

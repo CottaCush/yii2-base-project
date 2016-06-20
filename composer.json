@@ -1,6 +1,6 @@
 {
     "name": "cottacush/yii2-base-project",
-    "description": "An Improved Yii 2 Basic Project Template",
+    "description": "A Yii 2 Base Project Template",
     "keywords": ["yii2", "framework", "basic", "project template", "improved"],
     "type": "project",
     "license": "MIT",
