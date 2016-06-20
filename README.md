@@ -1,8 +1,10 @@
 #  Yii2 Base Project
 > A Yii 2 Base Project Template
 
-[![Latest Stable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/stable.png)](https://packagist.org/packages/cottacush/yii2-base-project)
-[![Total Downloads](https://poser.pugx.org/cottacush/yii2-base-project/downloads.png)](https://packagist.org/packages/cottacush/yii2-base-project)
+[![Latest Stable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/stable)](https://packagist.org/packages/cottacush/yii2-base-project)
+[![Total Downloads](https://poser.pugx.org/cottacush/yii2-base-project/downloads)](https://packagist.org/packages/cottacush/yii2-base-project)
+[![Latest Unstable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/unstable)](https://packagist.org/packages/cottacush/yii2-base-project)
+[![License](https://poser.pugx.org/cottacush/yii2-base-project/license)](https://packagist.org/packages/cottacush/yii2-base-project)
 
 **Features**
 
