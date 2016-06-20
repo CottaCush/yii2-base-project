@@ -1,5 +1,5 @@
-#  Yii2 Base Template
-> Improved Yii 2 Basic Application Template
+#  Yii2 Base Project Template
+> An Improved Yii 2 Basic Project Template
 
 **Features**
 - [Yii framework](http://www.yiiframework.com/) as the PHP MVC framework.
