@@ -7,21 +7,27 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
+require(__DIR__ . '/vendor/autoload.php');
+
+// Load Environment Variables
+if (getenv('APPLICATION_ENV') != 'production') {
+    $dotenv = new Dotenv\Dotenv(__DIR__ . DIRECTORY_SEPARATOR . 'env');
+    $dotenv->load();
+}
 
 // Setup application environment
-$envs = ['development', 'staging', 'production'];
+$envs = ['develop', 'staging', 'production', 'local'];
 $env = getenv("APPLICATION_ENV");
 
-if(!in_array($env, $envs)) {
-    echo ("Environment is not valid");
+if (!in_array($env, $envs)) {
+    echo("Environment is not valid");
     exit(1);
 }
 
-if($env == "development") {
+if (in_array($env, ['local', 'develop'])) {
     defined('YII_DEBUG') or define('YII_DEBUG', true);
 }
 
-require(__DIR__ . '/vendor/autoload.php');
 require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . "/config/console.php");
