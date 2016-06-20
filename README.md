@@ -12,7 +12,7 @@
 
 - Assets version - This fixes issue with updates to js and css files and cached browser files
 
-- New Relic - Ensures that the proper routes so up in the new relic monitoring dashboard
+- New Relic - Ensures that the proper routes show up in the new relic monitoring dashboard
 
 ## Requirements
 
