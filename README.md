@@ -1,20 +1,33 @@
 #  Yii2 Base Project
 > A Yii 2 Base Project Template
 
+[![Latest Stable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/stable.png)](https://packagist.org/packages/cottacush/yii2-base-project)
+[![Total Downloads](https://poser.pugx.org/cottacush/yii2-base-project/downloads.png)](https://packagist.org/packages/cottacush/yii2-base-project)
+
 **Features**
+
 - [Yii framework](http://www.yiiframework.com/) as the PHP MVC framework.
+ 
 - Security - It sets some headers that projects applications against click-jacking and XSS.
+
 - Assets version - This fixes issue with updates to js and css files and cached browser files
+
 - New Relic - Ensures that the proper routes so up in the new relic monitoring dashboard
 
-## Install
+## Requirements
 
-Via Composer
+The minimum requirement by this project template that your Web server supports PHP 5.5.0.
 
-``` bash
-$ composer require cottacush/yii2-base-project
-```
+### Install via Composer
 
+If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+
+You can then install this project template using the following command:
+
+~~~
+composer global require "fxp/composer-asset-plugin:~1.1.1"
+composer create-project --prefer-dist cottacush/yii2-base-project new_project
+~~~
 
 ## Virtual Host Setup
 
@@ -53,7 +66,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Security
 
-If you discover any security related issues, please email developers@cottacush.com instead of using the issue tracker.
+If you discover any security related issues, please email <developers@cottacush.com> instead of using the issue tracker.
 
 ## Contributors
 
