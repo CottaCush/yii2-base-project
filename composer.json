@@ -26,7 +26,8 @@
         "phpmd/phpmd" : "@stable",
         "sebastian/phpcpd": "*",
         "theseer/phpdox": "*",
-        "phpunit/phpunit": "4.8"
+        "phpunit/phpunit": "4.8",
+        "phing/phing": "2.*"
     },
     "config": {
         "process-timeout": 1800
