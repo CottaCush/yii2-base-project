@@ -49,9 +49,9 @@ Sample Virtual Host Config for Apache
 ```apache
 <VirtualHost *:80>
     ServerAdmin admin@example.com
-    DocumentRoot "<WebServer Root Dir>/yii2-base-project/web"
+    DocumentRoot "<WebServer Root Dir>/yii2-base-project/app/web"
     ServerName local.yii2-base-template.com
-    <Directory <WebServer Root Dir>/yii2-base-project/web>
+    <Directory <WebServer Root Dir>/yii2-base-project/app/web>
        AllowOverride all
        Options -MultiViews
       Require all granted
