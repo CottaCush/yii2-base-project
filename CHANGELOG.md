@@ -1,5 +1,11 @@
 # Changelog
 
+#### 1.1.0
+
+* Move core application files into app folder *2016-06-21*
+* Add sample ant build.xml file for easy continuous integration *2016-06-21*
+
+
 #### 1.0.0
 
 * Add Deployer [Deployer](http://deployer.org)  template *2016-06-20*
