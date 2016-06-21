@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="yii2-base-project" default="full-build">
+<project name="yii2-base-project" default="build">
     <property name="pdepend" value="${basedir}/vendor/bin/pdepend"/>
     <property name="phpcpd" value="${basedir}/vendor/bin/phpcpd"/>
     <property name="phpcs" value="${basedir}/vendor/bin/phpcs"/>
@@ -7,6 +7,10 @@
     <property name="phploc" value="${basedir}/vendor/bin/phploc"/>
     <property name="phpmd" value="${basedir}/vendor/bin/phpmd"/>
     <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/>
+
+    <target name="build"
+            depends="prepare,static-analysis"
+            description="Performs static analysis and withouy running the tests"/>
 
     <target name="full-build"
             depends="prepare,static-analysis,phpunit"
@@ -65,17 +69,15 @@
     <target name="lint"
             unless="lint.done"
             description="Perform syntax check of sourcecode files">
-        <apply executable="php" taskname="lint">
+        <apply executable="php" taskname="lint" failonerror="true">
             <arg value="-l"/>
 
             <fileset dir="${basedir}/app">
                 <include name="**/*.php"/>
-                <modified/>
             </fileset>
 
             <fileset dir="${basedir}/tests">
                 <include name="**/*.php"/>
-                <modified/>
             </fileset>
         </apply>
 
@@ -187,6 +189,8 @@
             unless="phpcpd.done"
             description="Find duplicate code using PHPCPD and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="${phpcpd}" taskname="phpcpd">
+            <arg value="--min-lines=2"/>
+            <arg value="--min-tokens=5"/>
             <arg path="${basedir}/app"/>
         </exec>
 
@@ -200,6 +204,8 @@
         <exec executable="${phpcpd}" taskname="phpcpd">
             <arg value="--log-pmd"/>
             <arg path="${basedir}/build/logs/pmd-cpd.xml"/>
+            <arg value="--min-lines=2"/>
+            <arg value="--min-tokens=10"/>
             <arg path="${basedir}/app"/>
         </exec>
 
@@ -213,6 +219,7 @@
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
             <arg path="${basedir}/build/phpunit.xml"/>
+            <arg path="${basedir}/tests"/>
         </exec>
 
         <property name="phpunit.done" value="true"/>
@@ -226,6 +233,7 @@
             <arg value="--configuration"/>
             <arg path="${basedir}/build/phpunit.xml"/>
             <arg value="--no-coverage"/>
+            <arg path="${basedir}/tests"/>
         </exec>
 
         <property name="phpunit.done" value="true"/>
