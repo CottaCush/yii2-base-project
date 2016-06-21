@@ -3,7 +3,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/stable)](https://packagist.org/packages/cottacush/yii2-base-project)
 [![Total Downloads](https://poser.pugx.org/cottacush/yii2-base-project/downloads)](https://packagist.org/packages/cottacush/yii2-base-project)
-[![Latest Unstable Version](https://poser.pugx.org/cottacush/yii2-base-project/v/unstable)](https://packagist.org/packages/cottacush/yii2-base-project)
 [![License](https://poser.pugx.org/cottacush/yii2-base-project/license)](https://packagist.org/packages/cottacush/yii2-base-project)
 
 **Features**
@@ -12,9 +11,11 @@
  
 - Security - It sets some headers that projects applications against click-jacking and XSS.
 
-- Assets version - This fixes issue with updates to js and css files and cached browser files
+- Assets version - This fixes issue with updates to js and css files and cached browser files.
 
-- New Relic - Ensures that the proper routes show up in the new relic monitoring dashboard
+- New Relic - Ensures that the proper routes show up in the new relic monitoring dashboard.
+
+- Continuous Integration - Sample ant build.xml file that can be easily modified.
 
 ## Requirements
 
@@ -59,6 +60,17 @@ Sample Virtual Host Config for Apache
 </VirtualHost>
 ```
 
+## Build
+
+Dependencies 
+
+- [Ant](http://ant.apache.org/) 
+
+Run build
+```
+ant
+```
+
 ## Environment Variables
 Make a copy of `.env.sample` to `.env` in the env directory.
 
@@ -70,7 +82,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 If you discover any security related issues, please email <developers@cottacush.com> instead of using the issue tracker.
 
-## Contributors
+## Credits
 
 - Adegoke Obasa <goke@cottacush.com>
 - [All Contributors](https://github.com/CottaCush/yii2-base-template/graphs/contributors)
