@@ -28,3 +28,15 @@ phpunit.phar
 
 # composer lock file
 composer.lock
+
+# Cache files
+cache.properties
+
+# Robo file
+RoboFile.php
+
+# Build log files
+build/logs
+build/pdepend
+build/coverage
+build/api
