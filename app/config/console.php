@@ -23,5 +23,6 @@ return [
         ],
         'db' => require('db.php')
     ],
-    'params' => require('params.php')
+    'params' => require('params.php'),
+    'vendorPath' => dirname(__DIR__) . "/../vendor",
 ];
