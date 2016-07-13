@@ -4,7 +4,7 @@ $config = [
     'id' => 'yii2_basic_template',
     'name' => 'Yii2 Basic Template',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'assetsAutoCompress'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -66,7 +66,8 @@ $config = [
     'view' => [
         'class' => '\smilemd\htmlcompress\View',
         'compress' => YII_ENV_DEV ? false : true,
-    ]
+    ],
+    'vendorPath' => dirname(__DIR__) . "/../vendor"
 ];
 
 if (YII_ENV_DEV) {
