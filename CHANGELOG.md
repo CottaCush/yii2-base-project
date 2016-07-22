@@ -1,5 +1,10 @@
 # Changelog
 
+#### 1.2.0
+
+* Set header X-Content-Type-Options nosniff *2016-07-22*
+
+
 #### 1.1.0
 
 * Move core application files into app folder *2016-06-21*
