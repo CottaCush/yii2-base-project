@@ -1,5 +1,10 @@
 # Changelog
 
+#### 1.2.1
+
+* Fix issue with postCreateProject directories in composer.json *2016-07-23*
+
+
 #### 1.2.0
 
 * Set header X-Content-Type-Options nosniff *2016-07-22*
