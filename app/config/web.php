@@ -4,7 +4,7 @@ $config = [
     'id' => 'yii2_basic_template',
     'name' => 'Yii2 Basic Template',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'assetsAutoCompress'],
+    'bootstrap' => ['log'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -55,6 +55,10 @@ $config = [
         ],
         'assetManager' => [
             'appendTimestamp' => true
+        ],
+        'view' => [
+            'class' => '\smilemd\htmlcompress\View',
+            'compress' => YII_ENV_DEV ? false : true,
         ]
     ],
     'params' => require('params.php'),
@@ -62,10 +66,6 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
-    ],
-    'view' => [
-        'class' => '\smilemd\htmlcompress\View',
-        'compress' => YII_ENV_DEV ? false : true,
     ],
     'vendorPath' => dirname(__DIR__) . "/../vendor"
 ];
