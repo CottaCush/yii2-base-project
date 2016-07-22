@@ -4,3 +4,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 Options -Indexes
 Header set X-Frame-Options SAMEORIGIN
+Header set X-Content-Type-Options nosniff
