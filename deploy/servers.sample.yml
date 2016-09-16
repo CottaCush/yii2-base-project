@@ -1,0 +1,22 @@
+# deploy/servers.yml
+# Create a copy of this file as servers.yml and replace the values appropriately
+
+# This is the staging stage, you can add more stages
+staging:
+    host:   <server_host>
+    user:   demo_user
+    stage:  development
+    identity_file:
+        public_key:  "~/.ssh/id_rsa.pub"
+        private_key: "~/.ssh/id_rsa.pem"
+        password: "key-password"
+    deploy_path:   "/var/www/html/yii2-base-project"
+    branch:        develop
+    DB_HOST: "localhost"
+    DB_NAME: "yii2_base"
+    DB_USERNAME: "root"
+    DB_PASSWORD: ""
+    APPLICATION_ENV: "staging"
+    REPO_URL: ""
+    SLACK_HOOK_URL: ""
+    SLACK_CHANNEL_NAME: ""
