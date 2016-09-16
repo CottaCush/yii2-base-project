@@ -1,5 +1,14 @@
 # Changelog
 
+#### 1.3.0
+
+* Fix issues with deployer script *2016-09-16*
+* Add yii2 composer config task *2016-09-16*
+* Create sample server.yml for deployer *2016-09-16*
+* Remove deploy settings from env file *2016-09-16*
+* Add yii2-utils as composer dependency *2016-09-16*
+
+
 #### 1.2.1
 
 * Fix issue with postCreateProject directories in composer.json *2016-07-23*
