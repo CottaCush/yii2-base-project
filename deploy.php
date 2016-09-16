@@ -12,11 +12,9 @@ set('writable_dirs', ['app/runtime', 'app/web/assets']);
 set('shared', ['app/runtime']);
 
 // TODO Add repository url for project
-set('repository', env('REPO_URL'));
+set('repository', '');
 
 env('composer_options', 'install --prefer-dist --optimize-autoloader --no-progress --no-interaction');
-
-$slackHookUrl = env('SLACK_HOOK_URL');
 
 /**
  * Run migrations
@@ -98,15 +96,19 @@ task('deploy', [
 
 function postToSlack($message)
 {
-    runLocally('curl -s -S -X POST --data-urlencode payload="{\"channel\": \"#' . env('SLACK_CHANNEL_NAME') . '\", \"username\": \"Release Bot\", \"text\": \"' . $message . '\"}"' . env('SLACK_HOOK_URL'));
+    $slackHookUrl = env('SLACK_HOOK_URL');
+    if (!empty($slackHookUrl)) {
+        runLocally('curl -s -S -X POST --data-urlencode payload="{\"channel\": \"#' . env('SLACK_CHANNEL_NAME') .
+            '\", \"username\": \"Release Bot\", \"text\": \"' . $message . '\"}"' . env('SLACK_HOOK_URL'));
+    } else {
+        write('Configure the SLACK_HOOK_URL to post to slack');
+    }
 }
 
 /**
  * Post to slack if the slack hook URL is not empty
  */
-if (!empty($slackHookUrl)) {
-    before('deploy:run_migrations', 'slack:before_migrate');
-    after('deploy:run_migrations', 'slack:after_migrate');
-    before('deploy', 'slack:before_deploy');
-    after('deploy', 'slack:after_deploy');
-}
+before('deploy:run_migrations', 'slack:before_migrate');
+after('deploy:run_migrations', 'slack:after_migrate');
+before('deploy', 'slack:before_deploy');
+after('deploy', 'slack:after_deploy');

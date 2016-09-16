@@ -17,6 +17,5 @@ staging:
     DB_USERNAME: "root"
     DB_PASSWORD: ""
     APPLICATION_ENV: "staging"
-    REPO_URL: ""
     SLACK_HOOK_URL: ""
     SLACK_CHANNEL_NAME: ""
