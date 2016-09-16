@@ -1,5 +1,10 @@
 # Changelog
 
+#### 1.3.1
+
+* Fix issues with deployer REPO_URL and SLACK_HOOK_URL *2016-09-16*
+
+
 #### 1.3.0
 
 * Fix issues with deployer script *2016-09-16*
