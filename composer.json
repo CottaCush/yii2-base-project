@@ -2,7 +2,7 @@
     "name": "cottacush/yii2-base-project",
     "description": "A Yii 2 Base Project Template",
     "keywords": ["yii2", "framework", "basic", "project template", "improved"],
-    "version": "1.2.1",
+    "version": "1.3.0",
     "type": "project",
     "license": "MIT",
     "minimum-stability": "stable",
@@ -26,10 +26,12 @@
         "phpmd/phpmd" : "@stable",
         "sebastian/phpcpd": "*",
         "theseer/phpdox": "*",
-        "phpunit/phpunit": "4.8"
+        "phpunit/phpunit": "4.8",
+        "cottacush/yii2-utils": "~1.0.0"
     },
     "config": {
-        "process-timeout": 1800
+        "process-timeout": 1800,
+        "discard-changes" : true
     },
     "scripts": {
         "post-create-project-cmd": [

@@ -8,9 +8,15 @@ require 'recipe/yii.php';
 
 serverList('deploy/servers.yml');
 
-set('writable_dirs', ['runtime', 'web/assets']);
+set('writable_dirs', ['app/runtime', 'app/web/assets']);
+set('shared', ['app/runtime']);
 
-env('composer_options', 'install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction');
+// TODO Add repository url for project
+set('repository', env('REPO_URL'));
+
+env('composer_options', 'install --prefer-dist --optimize-autoloader --no-progress --no-interaction');
+
+$slackHookUrl = env('SLACK_HOOK_URL');
 
 /**
  * Run migrations
@@ -45,7 +51,14 @@ task('deploy:cleanup', function () {
  * Upload env file
  */
 task('deploy:upload_environments_file', function () {
-    upload(env('local_path') . '/env/.env.{{APPLICATION_ENV}}', '{{release_path}}/env/.env');
+    upload(__DIR__ . '/app/env/.env.{{APPLICATION_ENV}}', '{{release_path}}/app/env/.env');
+});
+
+/** Yii2 composer setup */
+task('deploy:yii2_composer_config', function () {
+    // TODO Replace <GITHUB_TOKEN> with valid github token
+    run('composer config -g github-oauth.github.com <GITHUB_TOKEN>');
+    run('composer global require "fxp/composer-asset-plugin:~1.1.1"');
 });
 
 /** Slack Tasks Begin */
@@ -74,6 +87,7 @@ task('deploy', [
     'deploy:release',
     'deploy:update_code',
     'deploy:shared',
+    'deploy:yii2_composer_config',
     'deploy:vendors',
     'deploy:upload_environments_file',
     'deploy:run_migrations',
@@ -81,9 +95,6 @@ task('deploy', [
     'deploy:writable',
     'deploy:cleanup',
 ])->desc('Deploy Project');
-
-$repositoryUrl = env('REPO_URL');
-set('repository', $repositoryUrl);
 
 function postToSlack($message)
 {
