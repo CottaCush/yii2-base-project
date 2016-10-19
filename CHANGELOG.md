@@ -1,5 +1,10 @@
 # Changelog
 
+#### 1.4.0
+
+* Add dependency injection (DI) *2016-10-19*
+
+
 #### 1.3.1
 
 * Fix issues with deployer REPO_URL and SLACK_HOOK_URL *2016-09-16*
