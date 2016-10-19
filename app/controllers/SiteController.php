@@ -2,14 +2,24 @@
 
 namespace app\controllers;
 
+use app\models\ContactForm;
+use app\models\LoginForm;
+use app\services\DummyServiceInterface;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends BaseController
 {
+    /** @var  DummyServiceInterface */
+    protected $dummyService;
+
+    public function __construct($id, $module, DummyServiceInterface $dummyService, $config = [])
+    {
+        $this->dummyService = $dummyService;
+        parent::__construct($id, $module, $config);
+    }
+
     public function behaviors()
     {
         return [
@@ -51,6 +61,11 @@ class SiteController extends BaseController
         return $this->render('index');
     }
 
+    public function actionServiceTest()
+    {
+        return $this->dummyService->shout("Hello World");
+    }
+
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -88,8 +103,9 @@ class SiteController extends BaseController
 
     public function actionAbout()
     {
-        if($this->getUser()->isGuest)
+        if ($this->getUser()->isGuest) {
             return $this->getUser()->loginRequired();
+        }
         return $this->render('about');
     }
 }
