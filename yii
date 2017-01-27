@@ -11,12 +11,12 @@ require(__DIR__ . '/vendor/autoload.php');
 
 // Load Environment Variables
 if (getenv('APPLICATION_ENV') != 'production') {
-    $dotenv = new Dotenv\Dotenv(__DIR__ . DIRECTORY_SEPARATOR . 'env');
+    $dotenv = new Dotenv\Dotenv(__DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR .'env');
     $dotenv->load();
 }
 
 // Setup application environment
-$envs = ['develop', 'staging', 'production', 'local'];
+$envs = ['development', 'staging', 'production', 'local'];
 $env = getenv("APPLICATION_ENV");
 
 if (!in_array($env, $envs)) {
@@ -30,10 +30,13 @@ if (in_array($env, ['local', 'develop'])) {
 
 require(__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
 
-$config = require(__DIR__ . "/config/console.php");
+$config = require(__DIR__ . "/app/config/console.php");
 
 // Set default timezone
 date_default_timezone_set("Africa/Lagos");
+if (!ini_get("auto_detect_line_endings")) {
+    ini_set("auto_detect_line_endings", '1');
+}
 
 $application = new yii\console\Application($config);
 $exitCode = $application->run();
