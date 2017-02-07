@@ -29,7 +29,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => getenv('SMTP_HOST'),
                 'username' => getenv('SMTP_USERNAME'),
-                'password' => getenv('SMTP_USERNAME'),
+                'password' => getenv('SMTP_PASSWORD'),
                 'port' => getenv('SMTP_PORT'),
                 'encryption' => 'tls',
             ],
