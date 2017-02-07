@@ -1,5 +1,11 @@
 # Changelog
 
+#### 1.4.1
+
+* Fix directory name issues in yii file *2017-02-07*
+* Correct typo in SMTP config *2017-02-07*
+
+
 #### 1.4.0
 
 * Add dependency injection (DI) *2016-10-19*
