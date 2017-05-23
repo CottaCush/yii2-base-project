@@ -74,6 +74,10 @@ ant
 ## Environment Variables
 Make a copy of `.env.sample` to `.env` in the env directory.
 
+
+## Docker
+Inspired by [yii2-dockerized](https://github.com/codemix/yii2-dockerized/blob/master/Dockerfile)
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
