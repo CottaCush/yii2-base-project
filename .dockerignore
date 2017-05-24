@@ -1,6 +1,4 @@
 .git/*
-config/local.php
-config/console-local.php
 app/runtime
 app/web/assets
 vendor
