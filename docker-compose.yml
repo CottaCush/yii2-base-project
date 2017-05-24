@@ -4,6 +4,8 @@ services:
   web:
     build: ./
     restart: always
+    expose:
+      - "9000"
     volumes:
       - ./:/var/www/html/
     environment:

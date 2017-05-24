@@ -1,7 +1,6 @@
 .git/*
-env/.env
 config/local.php
 config/console-local.php
-runtime
-web/assets
+app/runtime
+app/web/assets
 vendor
