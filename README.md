@@ -74,6 +74,31 @@ ant
 ## Environment Variables
 Make a copy of `.env.sample` to `.env` in the env directory.
 
+
+## Docker
+
+This project is dockerized using the LEMP stack. The stack consists of:
+- PHP 7
+- nginx
+
+Inspired by [yii2-dockerized](https://github.com/codemix/yii2-dockerized/blob/master/Dockerfile)
+
+### Installation
+[Mac](https://www.docker.com/docker-mac)
+[Windows](https://www.docker.com/docker-windows)
+[Ubuntu](https://www.docker.com/docker-ubuntu)
+
+### Running Containers
+- Ensure docker is running
+- Change directory to project directory
+- Run the command `docker-compoose up`
+- To rebuild the containers after updates to docker config files, run `docker-composer up --build`
+
+### Entering Container CLI
+- Run the command `docker ps`
+- Check the Container ID for container with image ending with "_web"
+- Run the command `docker exec -it [container_id] bash`
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
