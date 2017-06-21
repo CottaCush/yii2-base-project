@@ -91,8 +91,8 @@ Inspired by [yii2-dockerized](https://github.com/codemix/yii2-dockerized/blob/ma
 ### Running Containers
 - Ensure docker is running
 - Change directory to project directory
-- Run the command `docker-compoose up`
-- To rebuild the containers after updates to docker config files, run `docker-composer up --build`
+- Run the command `docker-compose up`
+- To rebuild the containers after updates to docker config files, run `docker-compose up --build`
 
 ### Entering Container CLI
 - Run the command `docker ps`
