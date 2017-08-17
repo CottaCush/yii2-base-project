@@ -29,7 +29,7 @@ const shouldAddSourcemaps = config.sourcemaps,
 
 
 /* Declare our gulp tasks */
-gulp.task('build', series(clean, parallel(series(styles, minifyStyles), images)));
+gulp.task('build', parallel(series(styles, minifyStyles), images));
 gulp.task('default', series('build', watch));
 
 /* Describe our gulp tasks */
