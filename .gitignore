@@ -40,3 +40,6 @@ build/logs
 build/pdepend
 build/coverage
 build/api
+
+# Node.js
+node_modules
