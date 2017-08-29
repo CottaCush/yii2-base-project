@@ -14,7 +14,8 @@
         "lukasoppermann/http-status": "^2.0",
         "smilemd/yii2-htmlcompress": "^1.0",
         "cottacush/yii2-utils": "dev-features/file-upload-service ",
-        "cottacush/yii2-widgets": "dev-master"
+        "cottacush/yii2-widgets": "dev-master",
+        "frostealth/yii2-aws-s3": "^1.0"
     },
     "require-dev": {
         "codeception/codeception": "*",
