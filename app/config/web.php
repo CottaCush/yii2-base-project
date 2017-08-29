@@ -50,7 +50,7 @@ $config = [
             'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
-                
+
             ]
         ],
         'assetManager' => [
@@ -59,6 +59,21 @@ $config = [
         'view' => [
             'class' => '\smilemd\htmlcompress\View',
             'compress' => YII_ENV_DEV ? false : true,
+        ],
+        's3bucket' => [
+            'class' => \frostealth\yii2\aws\s3\Storage::className(),
+            'region' => 'eu-west-1',
+            'credentials' => [
+                'key' => getenv('AWS_KEY'),
+                'secret' => getenv('AWS_SECRET'),
+            ],
+            'bucket' => getenv('APPLICATION_ENV') . '.yii2baseproject',
+            'defaultAcl' => \frostealth\yii2\aws\s3\Storage::ACL_PUBLIC_READ,
+            'debug' => false,
+        ],
+        'objectStorage' => [
+            'class' => \CottaCush\Yii2\File\ObjectStorageComponent::class,
+            'objectStorageClientClass' => \CottaCush\Yii2\File\FrostealthS3ObjectStorageClient::class
         ]
     ],
     'params' => require('params.php'),

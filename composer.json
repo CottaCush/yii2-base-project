@@ -13,10 +13,11 @@
         "vlucas/phpdotenv": "^2.2",
         "lukasoppermann/http-status": "^2.0",
         "smilemd/yii2-htmlcompress": "^1.0",
-        "cottacush/yii2-utils": "~1.7.0"
+        "cottacush/yii2-utils": "dev-features/file-upload-service ",
+        "cottacush/yii2-widgets": "dev-master"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
+        "codeception/codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
