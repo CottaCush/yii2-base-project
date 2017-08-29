@@ -2,10 +2,7 @@
 
 namespace app\controllers;
 
-use CottaCush\Yii2\File\ObjectStorageComponent;
-use CottaCush\Yii2\File\ObjectStorageException;
-use Yii;
-use yii\web\UploadedFile;
+use CottaCush\Yii2\Action\ObjectStorageUploadAction;
 
 /**
  * Class DemoController
@@ -14,26 +11,20 @@ use yii\web\UploadedFile;
  */
 class DemoController extends BaseController
 {
+    public function actions()
+    {
+        return [
+            'drop-zone-upload' => [
+                'class' => ObjectStorageUploadAction::class,
+                'uploadedFileName' => 'dropzoneFile',
+                'objectStorageFileName' => 'dropzonetestfile.jpg',
+                'objectStoragePath' => 'dropzone'
+            ]
+        ];
+    }
+
     public function actionDropZone()
     {
         return $this->render('dropzone');
-    }
-
-    public function actionDropZoneUpload()
-    {
-        $uploadedFile = UploadedFile::getInstanceByName('dropzoneFile');
-        if (!$uploadedFile) {
-            return $this->sendErrorResponse('No image uploaded', 'error', 400);
-        }
-
-        /** @var ObjectStorageComponent $objectStorage */
-        $objectStorage = Yii::$app->get('objectStorage');
-
-        try {
-            $url = $objectStorage->storeUploadedFile($uploadedFile);
-            return $this->sendSuccessResponse(['url' => $url]);
-        } catch (ObjectStorageException $objectStorageException) {
-            return $this->sendErrorResponse($objectStorageException->getMessage(), 'error', 500);
-        }
     }
 }
