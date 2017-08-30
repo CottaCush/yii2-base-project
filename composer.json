@@ -12,8 +12,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "vlucas/phpdotenv": "^2.2",
         "lukasoppermann/http-status": "^2.0",
-        "smilemd/yii2-htmlcompress": "^1.0",
-        "cottacush/yii2-utils": "dev-features/file-upload-service ",
+        "ogheo/yii2-htmlcompress": "^1.1",
+        "cottacush/yii2-utils": "dev-features/file-upload-service",
         "cottacush/yii2-widgets": "dev-master",
         "frostealth/yii2-aws-s3": "^1.0"
     },

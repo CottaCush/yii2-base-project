@@ -1,5 +1,18 @@
 # Changelog
 
+#### 1.6.0
+
+Integrated Node.js and Gulp 
+- Added package.json with gulp dependencies
+- Added a gulpfile with common functions and a config file for file paths and globs
+- Switched to yarn to install npm modules
+
+
+#### 1.5.0
+
+Dockerize using nginx, PHP7 and FPM
+
+
 #### 1.4.1
 
 * Fix directory name issues in yii file *2017-02-07*
