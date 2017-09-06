@@ -78,7 +78,7 @@ images.description = 'Minify images back into the same (source) folder';
 
 function watch(done) {
     if (development()) {
-        gulp.watch(config.styles.sourceFiles, styles);
+        gulp.watch(path.join(config.styles.sourceDir, '**/*.less'), styles);
     }
     done();
 }
