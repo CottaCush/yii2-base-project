@@ -8,7 +8,7 @@ var config = {
     buildDir: "./app/web",
     styles: {
         sourceDir: "./app/web/less",
-        sourceFiles: "./app/web/less/**/*.less",
+        sourceFiles: "./app/web/less/styles.less",
         destinationDir: "./app/web/css",
         mapsDir: "./maps", // relative to the destination directory
         postcss: [
