@@ -3,7 +3,7 @@ var environments = require('gulp-environments'),
     autoprefixer = require('autoprefixer');
 
 
-var config = {
+var feConfig = {
     sourceDir: "./app/web",
     buildDir: "./app/web",
     styles: {
@@ -23,15 +23,40 @@ var config = {
     images: {
         sourceDir: "./app/web/img",
         sourceFiles: "./app/web/img/**/*",
-        destinationDir: "./app/web/img"
+        destinationDir: "./" // save minified images in the same directory
     }
 };
 
+var adminConfig = {
+    sourceDir: "./app/web/admin-assets",
+    buildDir: "./app/web/admin-assets",
+    styles: {
+        sourceDir: "./app/web/admin-assets/less",
+        sourceFiles: "./app/web/admin-assets/less/styles.less",
+        destinationDir: "./app/web/admin-assets/css",
+        mapsDir: "./maps", // relative to the destination directory
+        postcss: [
+            autoprefixer({browsers: ["last 5 versions", "> .5% in NG", "not ie < 11"]})
+        ]
+    },
+    scripts: {
+        sourceDir: "./app/web/admin-assets/js",
+        sourceFiles: ["./app/web/admin-assets/js/**/*.js"],
+        destinationDir: "./app/web/admin-assets/js"
+    },
+    images: {
+        sourceDir: "./app/web/admin-assets/img",
+        sourceFiles: "./app/web/admin-assets/img/**/*",
+        destinationDir: "./" // save minified images in the same directory
+    }
+};
+
+
 /* Add sourcemaps on all environments except production */
-config.sourcemaps = !(environments.production());
+var generalConfig = {};
+generalConfig.sourcemaps = !(environments.production());
 
 /* Minify build files on all environments except development */
-config.minify = !(environments.development());
+generalConfig.minify = !(environments.development());
 
-
-module.exports = config;
+module.exports = {feConfig, adminConfig, generalConfig};

@@ -1,0 +1,98 @@
+/*
+ * Component: modal
+ * ----------------
+ */
+.modal {
+  background: rgba(0, 0, 0, .3);
+}
+
+.modal-content {
+  border-radius: @border-radius-base;
+  .box-shadow(0 2px 3px rgba(0, 0, 0, .125));
+  border: 0;
+  @media (min-width: @screen-sm-min) {
+    .box-shadow(0 2px 3px rgba(0, 0, 0, .125));
+  }
+}
+.modal-header,
+.modal-footer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal-header {
+  border-bottom-color: transparent;
+
+  .close {
+    margin-top: -5px;
+    font-size: 35px;
+    font-weight: 400;
+  }
+}
+
+.modal-title {
+  font-size: @font-size-h3;
+  line-height: @line-height-large;
+}
+
+.modal-footer {
+  background: lighten(@box-border-color, 2.5%);
+  border-top-color: @box-border-color;
+  .border-bottom-radius(@border-radius-base);
+}
+
+//Modal variants
+.modal-primary {
+  .modal-body {
+    &:extend(.bg-light-blue);
+  }
+  .modal-header,
+  .modal-footer {
+    &:extend(.bg-light-blue-active);
+    border-color: darken(@light-blue, 10%);
+  }
+}
+
+.modal-warning {
+  .modal-body {
+    &:extend(.bg-yellow);
+  }
+  .modal-header,
+  .modal-footer {
+    &:extend(.bg-yellow-active);
+    border-color: darken(@yellow, 10%);
+  }
+}
+
+.modal-info {
+  .modal-body {
+    &:extend(.bg-aqua);
+  }
+  .modal-header,
+  .modal-footer {
+    &:extend(.bg-aqua-active);
+    border-color: darken(@aqua, 10%);
+  }
+}
+
+.modal-success {
+  .modal-body {
+    &:extend(.bg-green);
+  }
+  .modal-header,
+  .modal-footer {
+    &:extend(.bg-green-active);
+    border-color: darken(@green, 10%);
+  }
+}
+
+.modal-danger {
+  .modal-body {
+    &:extend(.bg-red);
+  }
+  .modal-header,
+  .modal-footer {
+    &:extend(.bg-red-active);
+    border-color: darken(@red, 10%);
+  }
+}

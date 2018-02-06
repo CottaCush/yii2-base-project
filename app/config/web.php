@@ -57,7 +57,7 @@ $config = [
             'appendTimestamp' => true
         ],
         'view' => [
-            'class' => '\smilemd\htmlcompress\View',
+            'class' => '\ogheo\htmlcompress\View',
             'compress' => YII_ENV_DEV ? false : true,
         ]
     ],

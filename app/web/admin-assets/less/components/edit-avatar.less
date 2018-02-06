@@ -1,0 +1,212 @@
+.edit-user-avatar {
+  position: relative;
+  max-width: 160px;
+  margin-bottom: @line-height-computed;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  .edit-user-avatar-hover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    padding-top: 50%;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, .5);
+    font-size: 18px;
+    line-height: 0;
+  }
+
+  &:hover {
+    .edit-user-avatar-hover {
+      display: block;
+    }
+  }
+}
+
+.edit-user-dropzone {
+  position: relative;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-height: 340px;
+  text-align: center;
+
+  .dz-message,
+  .dz-image {
+    width: 270px;
+    min-height: 270px;
+    margin: 0 auto 10px;
+    border: 2px dashed rgba(0, 0, 0, .2);
+  }
+
+  .dz-message {
+    height: 270px;
+    padding-top: 50%;
+    font-size: 16px;
+    line-height: 0;
+
+    .dz-drag-hover& {
+      border-color: @light-blue;
+    }
+
+    .dz-max-files-reached& {
+      display: none;
+    }
+  }
+
+  .dz-preview {
+    margin: 0;
+    width: auto;
+
+    .dz-progress {
+      display: none;
+
+      .dz-upload {
+        background-color: #ccc;
+      }
+    }
+
+    &.dz-processing .dz-progress {
+      display: block;
+    }
+
+  }
+
+  .dz-image {
+    img {
+      width: 100%;
+    }
+  }
+
+}
+
+.edit-user-cropit {
+  min-height: 300px;
+  text-align: center;
+
+  .cropit {
+    &-preview {
+      position: relative;
+      .square(~'270px !important');
+      margin: 0 auto;
+      border: 2px dashed #ccc;
+      border-color: rgba(0, 0, 0, .2);
+
+      &.cropit-drag-hovered {
+        border-color: @brand-blue;
+      }
+      //border: 0;
+      //border-radius: 50%;
+
+      &-text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding-top: 44%;
+        font-size: 21px;
+        color: #999;
+      }
+    }
+
+    &-preview-background {
+      opacity: .1;
+    }
+
+    &-image-input {
+      display: none;
+      visibility: hidden;
+    }
+
+    &-zoom-controls {
+      margin-top: 10px;
+
+      .fa {
+        height: 30px;
+        color: #555;
+        line-height: 30px;
+      }
+
+      .cropit-image-zoom-input {
+        height: 10px;
+        background: #ddd;
+        border-radius: 5px;
+        outline: none;
+        appearance: none;
+
+        &::-ms-track {
+          width: 100%;
+          color: transparent;
+          background: transparent;
+          cursor: pointer;
+          border-color: transparent;
+        }
+
+        //* custom thumb styles for input range */
+        .thumb-styles() {
+          .square(20px);
+          background: #666;
+          border: 0;
+          cursor: pointer;
+          border-radius: 50%;
+
+          &:hover {
+            background: #808080;
+          }
+        }
+        .disabled-thumb-styles() {
+          background: #ccc;
+          cursor: not-allowed;
+        }
+
+        // It's important that the thumb styles stay separate so the browser won't ignore it
+        &::-webkit-slider-thumb {
+          margin-top: 0;
+          .thumb-styles();
+          appearance: none;
+        }
+
+        &::-moz-range-thumb {
+          .thumb-styles();
+        }
+
+        &::-ms-thumb {
+          .thumb-styles();
+        }
+
+        &:disabled {
+          background: #eee;
+          &::-webkit-slider-thumb {
+            .disabled-thumb-styles();
+          }
+          &::-moz-range-thumb {
+            .disabled-thumb-styles();
+          }
+          &::-ms-thumb {
+            .disabled-thumb-styles();
+          }
+        }
+      }
+    }
+    &-zoom-control-wrap {
+      margin-left: 30px;
+      margin-right: 45px;
+      padding-top: 10px;
+    }
+
+    &-add-image-btn {
+      margin-top: 15px;
+    }
+  }
+
+}

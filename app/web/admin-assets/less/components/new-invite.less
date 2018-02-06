@@ -1,0 +1,136 @@
+@new-invite-button-width: 140px;
+@new-invite-tag-height: 22px;
+@new-invite-inner-padding: @padding-base-vertical;
+
+.new-invite {
+
+  &:extend(.clearfix all);
+
+  &__label {
+    display: block;
+  }
+
+  &__dropdown-wrap {
+    float: right;
+  }
+
+  &__btn {
+    min-width: @new-invite-button-width;
+    padding-right: 22px; // extra padding to accommodate caret on the right
+    text-align: left;
+
+    .caret {
+      position: absolute;
+      top: @padding-base-vertical + 9; // extra 9px to vertically align caret
+      right: @padding-base-horizontal;
+    }
+  }
+
+  &__dropdown-menu {
+    li {
+      a {
+        padding-left: 30px;
+      }
+    }
+
+    .active {
+      position: relative;
+
+      :before {
+        position: absolute;
+        content: "\2714";
+        left: 12px;
+      }
+
+      &:hover a,
+      & a {
+        background: @light-blue;
+        //color: #333;
+      }
+    }
+  }
+
+  &__select {
+    display: none;
+  }
+
+  &__box {
+    margin-right: @new-invite-button-width;
+    padding-right: 8px;
+
+    &-inner {
+      padding: @new-invite-inner-padding;
+      padding-bottom: 0;
+      border: 1px solid #ddd;
+      vertical-align: top;
+
+      &.focus {
+        border-color: @light-blue;
+      }
+
+      &.error,
+      &.focus.error {
+        border-color: @brand-red;
+      }
+    }
+  }
+
+  &__error {
+    color: @brand-red;
+  }
+
+  &__tag {
+    position: relative;
+    display: inline-block;
+    height: @new-invite-tag-height + 1; // extra 1px for border
+    margin-right: @new-invite-inner-padding;
+    padding: 0 (@new-invite-tag-height + 2) 0 6px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    border-radius: @border-radius-small;
+    cursor: default;
+    overflow: hidden;
+
+    &-cancel {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: @new-invite-tag-height;
+      height: @new-invite-tag-height;
+      font-size: @new-invite-tag-height;
+      color: #999;
+      line-height: @new-invite-tag-height;
+      text-align: center;
+
+      &:hover,
+      &:focus {
+        color: #777;
+        background: #ddd;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  &__input {
+    width: auto;
+    min-width: 150px;
+    height: @new-invite-tag-height;
+    margin: 0;
+    padding: 0;
+    line-height: @new-invite-tag-height;
+    background: transparent;
+    border: 0;
+    vertical-align: top;
+
+    &:focus {
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  &__tag,
+  &__input {
+    margin-bottom: @new-invite-inner-padding;
+  }
+}
