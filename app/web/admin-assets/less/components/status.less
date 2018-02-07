@@ -1,0 +1,53 @@
+.status-variant(@color) {
+  color: @color;
+  border-color: @color;
+}
+
+.status {
+  display: inline-block;
+  padding: 0 6px;
+  font-size: @font-size-small;
+  line-height: 1.3;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 2px;
+
+  &--default,
+  &--inactive,
+  &--suspended,
+  &--deleted,
+  &--draft {
+    .status-variant(#999);
+  }
+
+  &--subscribed,
+  &--success,
+  &--active,
+  &--accepted,
+  &--answered,
+  &--sent,
+  &--verified,
+  &--published {
+    .status-variant(@green);
+  }
+
+  &--approved {
+    .status-variant(@blue);
+  }
+
+  &--unsubscribed,
+  &--pending,
+  &--warned,
+  &--reported,
+  &--unverified,
+  &--for-review {
+    .status-variant(@yellow);
+  }
+
+  &--cancelled,
+  &--cleared,
+  &--revise {
+    .status-variant(@red);
+  }
+
+}

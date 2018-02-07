@@ -12,6 +12,9 @@ const gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     path = require('path'),
     config = require('./gulpfile-config');
+    feConfig = config.feConfig;
+    adminConfig = config.adminConfig;
+    generalConfig = config.generalConfig;
 
 
 /* Declare our environments */
@@ -24,26 +27,53 @@ const series = gulp.series,
     parallel = gulp.parallel;
 
 /* Extract some config properties for convenience */
-const shouldAddSourcemaps = config.sourcemaps,
-    shouldMinify = config.minify;
+const shouldAddSourcemaps = generalConfig.sourcemaps,
+    shouldMinify = generalConfig.minify;
 
 
 /* Declare our gulp tasks */
-gulp.task('build', parallel(series(styles, minifyStyles), images));
+gulp.task('build:admin', parallel(series(adminStyles, minifyAdmin), adminImages));
+gulp.task('build:fe', parallel(series(feStyles, minifyFe), feImages));
+gulp.task('build', series('build:admin', 'build:fe'));
 gulp.task('default', series('build', watch));
 
 /* Describe our gulp tasks */
 gulp.task('build').description = 'Clean out the build folder then compile styles, minify images, and copy assets into the build folder';
+gulp.task('build:admin').description = 'Clean out the build folder in the admin module and build';
+gulp.task('build:fe').description = 'Clean out the build folder in the project root and build';
 gulp.task('default').description = 'Run the build task and watch for any changes';
 
-
-function clean(done) {
-    rimraf(config.buildDir, done);
+/**
+ * This function cleans the build directory in the main project
+ */
+function cleanFe(done) {
+    rimraf(feConfig.buildDir, done);
 }
-clean.description = 'Cleans the build folder';
+cleanFe.description = 'Cleans the build folder in the project root';
 
+/**
+ * This function cleans the build directory for the admin module
+ */
+function cleanAdmin(done) {
+    rimraf(adminConfig.buildDir, done);
+}
+cleanAdmin.description = 'Cleans the build folder for the admin module';
 
-function styles() {
+/**
+ * This function builds styles in the admin module
+ */
+function adminStyles() {
+    return styles(adminConfig);
+}
+
+/**
+ * This function builds styles in the main project
+ */
+function feStyles() {
+    return styles(feConfig);
+}
+
+function styles(config) {
     let sConfig = config.styles,
         files = sConfig.sourceFiles,
         source = sConfig.sourceDir,
@@ -55,18 +85,28 @@ function styles() {
 }
 styles.description = 'Compiles SCSS files to CSS; adds source maps if specified';
 
+function minifyFe(done) {
+    minifyStyles(feConfig);
+    done();
+}
+minifyFe.description = 'Minify CSS files for the main project';
 
-function minifyStyles(done) {
+function minifyAdmin(done) {
+    minifyStyles(adminConfig);
+    done();
+}
+minifyAdmin.description = 'Minify CSS files for the admin module';
+
+function minifyStyles(config) {
     if (shouldMinify) {
         let dir = config.styles.destinationDir;
         return minifyCSS(dir, dir, false);
     }
-    done();
 }
 minifyStyles.description = 'Minify CSS files';
 
 
-function images() {
+function images(config) {
     let iConfig = config.images,
         sourceDir = iConfig.sourceDir,
         destDir = iConfig.destinationDir;
@@ -75,10 +115,27 @@ function images() {
 }
 images.description = 'Minify images back into the same (source) folder';
 
+/**
+ * This function minifies images for the admin module
+ */
+function adminImages() {
+    return images(adminConfig);
+}
+adminImages.description = 'Minify images for the admin module';
+
+/**
+ * This function minifies images for the main project
+ */
+function feImages() {
+    return images(feConfig);
+}
+feImages.description = 'Minify images for the main project';
+
 
 function watch(done) {
     if (development()) {
-        gulp.watch(path.join(config.styles.sourceDir, '**/*.less'), styles);
+        var files = [path.join(adminConfig.styles.sourceDir, '**/*.less'), path.join(feConfig.styles.sourceDir, '**/*.less')];
+        gulp.watch(files, styles);
     }
     done();
 }

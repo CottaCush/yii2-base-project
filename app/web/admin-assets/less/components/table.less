@@ -1,0 +1,114 @@
+/*
+ * Component: Table
+ * ----------------
+ */
+
+.table {
+  //Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border-top: 1px solid @table-border-color;
+      }
+    }
+  }
+  //thead cells
+  > thead > tr > th {
+    border-bottom: 2px solid @table-border-color;
+  }
+
+  th {
+    font-weight: bold;
+    text-transform: uppercase;
+    [data-sort] {
+      position: relative;
+      display: block;
+      padding-right: 20px;
+
+      &, &:hover, &:focus, &:active {
+        color: inherit;
+        outline: none;
+      }
+
+      &:after {
+        content: @fa-var-sort;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        font-family: "FontAwesome";
+      }
+
+      &.asc:after {
+        content: @fa-var-sort-asc;
+      }
+
+      &.desc:after {
+        content: @fa-var-sort-desc;
+      }
+    }
+  }
+
+
+  .action-column {
+    width: 100px;
+  }
+
+  //progress bars in tables
+  tr td .progress {
+    margin-top: 5px;
+  }
+
+  .btn {
+    //.button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+    .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @btn-border-radius-small);
+  }
+}
+
+//Bordered Table
+.table-bordered {
+  border: 1px solid @table-border-color;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border: 1px solid @table-border-color;
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 2px;
+    }
+  }
+}
+
+.table.no-border {
+  &,
+  td,
+  th {
+    border: 0;
+  }
+}
+
+/* .text-center in tables */
+table.text-center {
+  &, td, th {
+    text-align: center;
+  }
+}
+
+.table.align {
+  th {
+    text-align: left;
+  }
+  td {
+    text-align: right;
+  }
+}

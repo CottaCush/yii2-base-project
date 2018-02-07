@@ -1,0 +1,182 @@
+/*
+ * Component: Form
+ * ---------------
+ */
+.form-control {
+  border-radius: @input-radius;
+  box-shadow: none;
+  border-color: @gray;
+
+  &.auto-height{
+    height: auto;
+  }
+  &:focus {
+    border-color: @light-blue;
+    box-shadow: none;
+  }
+  &::-moz-placeholder,
+  &:-ms-input-placeholder,
+  &::-webkit-input-placeholder {
+    color: #bbb;
+    opacity: 1;
+  }
+
+  &:not(select) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
+
+legend {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  &.has-success {
+    label {
+      color: @green;
+    }
+    .form-control {
+      border-color: @green;
+      box-shadow: none;
+    }
+    .help-block {
+      color: @green;
+    }
+  }
+
+  &.has-warning {
+    label {
+      color: @yellow;
+    }
+    .form-control {
+      border-color: @yellow;
+      box-shadow: none;
+    }
+    .help-block {
+      color: @yellow;
+    }
+  }
+
+  &.has-error {
+    label {
+      color: @red;
+    }
+    .form-control {
+      border-color: @red;
+      box-shadow: none;
+    }
+    .help-block {
+      color: @red;
+    }
+  }
+}
+
+.form-group-sm,
+.form-group-lg {
+  .form-control {
+    border-radius: @input-radius;
+  }
+}
+
+.form-group-inline {
+  label {
+    display: inline-block;
+    padding-right: 20px;
+    //color: @text-muted;
+  }
+
+  .form-control {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+.help-block-text {
+  .help-block;
+}
+
+/* Input group */
+.input-group {
+  .input-group-addon {
+    border-radius: @input-radius;
+    border-color: @gray;
+    background-color: #fff;
+    &.fa{
+      display: table-cell !important;
+    }
+  }
+}
+
+/* button groups */
+.btn-group-vertical {
+  .btn {
+    &.btn-flat:first-of-type, &.btn-flat:last-of-type {
+      border-radius: 0;
+    }
+  }
+}
+
+.icheck > label {
+  padding-left: 0;
+}
+
+/* support Font Awesome icons in form-control */
+.form-control-feedback.fa {
+  line-height: @input-height-base;
+}
+
+.input-lg + .form-control-feedback.fa,
+.input-group-lg + .form-control-feedback.fa,
+.form-group-lg .form-control + .form-control-feedback.fa {
+  line-height: @input-height-large;
+}
+
+.input-sm + .form-control-feedback.fa,
+.input-group-sm + .form-control-feedback.fa,
+.form-group-sm .form-control + .form-control-feedback.fa {
+  line-height: @input-height-small;
+}
+
+.form-title-group {
+  label {
+    font-size: 21px;
+    font-weight: normal;
+    line-height: 1;
+  }
+  .form-control {
+    height: 40px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+// Checkbox no margin support. Used in permissions
+.checkbox {
+  &-inline {
+    &.no-margin {
+      margin: 0;
+    }
+  }
+}
+
+.checkbox-padded {
+  padding-left: 20px;
+  font-weight: 400;
+}
+
+.checkbox-medium-size {
+  font-size: 15px;
+  margin: 12px 0;
+
+  & + & {
+    margin-top: -4px;
+  }
+}
+
+.checkbox-indented {
+  padding-left: 20px;
+  margin-left: 20px;
+}

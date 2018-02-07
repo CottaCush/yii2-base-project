@@ -1,0 +1,24 @@
+.panel--redactor {
+  .panel-body {
+    padding: 0;
+  }
+
+  .redactor-box,
+  .redactor-editor {
+    .border-bottom-radius(@panel-border-radius);
+  }
+  .redactor-editor {
+    border-color: transparent;
+  }
+}
+
+.panel-has-error {
+  &, .panel-heading {
+    border-color: @brand-danger;
+  }
+
+  .panel-heading {
+    background: hsl(hue(@brand-danger), 35%, 95%);
+    color: @brand-danger;
+  }
+}
