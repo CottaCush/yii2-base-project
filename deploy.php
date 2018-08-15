@@ -9,7 +9,7 @@ require 'recipe/yii.php';
 serverList('deploy/servers.yml');
 
 set('writable_dirs', ['app/runtime', 'app/web/assets']);
-set('shared', ['app/runtime']);
+set('shared_dirs', ['app/runtime']);
 
 // TODO Add repository url for project
 set('repository', '');
