@@ -50,7 +50,7 @@ $config = [
             'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
-                
+
             ]
         ],
         'assetManager' => [
@@ -65,13 +65,15 @@ $config = [
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@npm/bootstrap/dist',
                     'css' => [
-                        YII_ENV_DEV ? 'css/bootstrap.css' : '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
+                        YII_ENV_DEV ? 'css/bootstrap.css' :
+                            '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
                     ]
                 ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
                     'sourcePath' => '@npm/bootstrap/dist',
                     'js' => [
-                        YII_ENV_DEV ? 'js/bootstrap.js' : '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js',
+                        YII_ENV_DEV ? 'js/bootstrap.js' :
+                            '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js',
                     ]
                 ]
             ],
