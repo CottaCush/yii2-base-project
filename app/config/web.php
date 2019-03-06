@@ -54,7 +54,27 @@ $config = [
             ]
         ],
         'assetManager' => [
-            'appendTimestamp' => true
+            'appendTimestamp' => true,
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => '@npm/jquery/dist',
+                    'js' => [
+                        YII_ENV_DEV ? 'jquery.js' : '//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@npm/bootstrap/dist',
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap.css' : '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => '@npm/bootstrap/dist',
+                    'js' => [
+                        YII_ENV_DEV ? 'js/bootstrap.js' : '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js',
+                    ]
+                ]
+            ],
         ],
         'view' => [
             'class' => '\ogheo\htmlcompress\View',
@@ -67,7 +87,10 @@ $config = [
             'class' => 'app\modules\admin\Module',
         ],
     ],
-    'vendorPath' => dirname(__DIR__) . "/../vendor"
+    'vendorPath' => dirname(__DIR__) . "/../vendor",
+    'aliases' => [
+        '@npm'   => dirname(__DIR__) . "/../node_modules",
+    ]
 ];
 
 if (YII_ENV_DEV) {

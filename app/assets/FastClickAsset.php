@@ -11,7 +11,7 @@ use CottaCush\Yii2\Assets\AssetBundle;
  */
 class FastClickAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/fastclick/lib';
+    public $sourcePath = '@npm/fastclick/lib';
 
     public $js = [
         'fastclick.js'

@@ -5,9 +5,9 @@
 
 namespace app\services;
 
-use yii\base\Object;
+use yii\base\BaseObject as DummyObject;
 
-class DummyService extends Object implements DummyServiceInterface
+class DummyService extends DummyObject implements DummyServiceInterface
 {
     public function shout($text)
     {

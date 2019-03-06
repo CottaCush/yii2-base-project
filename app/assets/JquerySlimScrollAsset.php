@@ -11,7 +11,7 @@ use CottaCush\Yii2\Assets\AssetBundle;
  */
 class JquerySlimScrollAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/jquery-slimscroll';
+    public $sourcePath = '@npm/jquery-slimscroll';
 
     public $js = [
         'jquery.slimscroll.min.js'
