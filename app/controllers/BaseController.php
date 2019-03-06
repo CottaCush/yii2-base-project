@@ -2,10 +2,9 @@
 
 namespace app\controllers;
 
-
 use Lukasoppermann\Httpstatus\Httpstatus;
 use Yii;
-use yii\web\Controller;
+use CottaCush\Yii2\Controller\BaseController as UtilsController;
 use yii\web\Response;
 
 /**
@@ -13,7 +12,7 @@ use yii\web\Response;
  * @package app\controllers
  * @author Adegoke Obasa <goke@cottacush.com>
  */
-class BaseController extends Controller
+class BaseController extends UtilsController
 {
     /**
      * @var Httpstatus $httpStatuses
@@ -249,5 +248,15 @@ class BaseController extends Controller
     public function getModuleUser()
     {
         return $this->module->get('user');
+    }
+
+    /**
+     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
+     * @return int|string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getUserId()
+    {
+        return $this->getModuleUser()->id;
     }
 }

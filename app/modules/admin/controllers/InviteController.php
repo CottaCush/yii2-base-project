@@ -21,11 +21,10 @@ class InviteController extends BaseAdminController
 {
     const INDEX_URL = '/admin/invite';
     const LOGIN_URL = '/login';
-    const MOCK_USER_ID = 3;
 
     public function actions()
     {
-        $currentUser = self::MOCK_USER_ID;
+        $currentUser = $this->getUserId();
 
         return [
             'cancel' => [
@@ -89,7 +88,7 @@ class InviteController extends BaseAdminController
         $postData = $this->getRequest()->post();
 
         //Todo: get createdBy from session
-        $createdBy = self::MOCK_USER_ID;
+        $createdBy = $this->getUserId();
 
         $emails = ArrayHelper::getValue($postData, 'email');
         $role = ArrayHelper::getValue($postData, 'role');
