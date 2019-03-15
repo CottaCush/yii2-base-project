@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-
 use Lukasoppermann\Httpstatus\Httpstatus;
 use Yii;
-use yii\web\Controller;
+use CottaCush\Yii2\Controller\BaseController as UtilsController;
+use yii\helpers\Html;
 use yii\web\Response;
 
 /**
@@ -13,7 +13,7 @@ use yii\web\Response;
  * @package app\controllers
  * @author Adegoke Obasa <goke@cottacush.com>
  */
-class BaseController extends Controller
+class BaseController extends UtilsController
 {
     /**
      * @var Httpstatus $httpStatuses
@@ -197,47 +197,26 @@ class BaseController extends Controller
     /**
      * show flash messages
      * @author Adeyemi Olaoye <yemi@cottacush.com>
+     * @param bool $sticky
      * @return string
      */
-    public function showFlashMessages()
+    public function showFlashMessages($sticky = false)
     {
-        $flashMessages = '';
-        $allMessages = \Yii::$app->session->getAllFlashes();
+        $timeout = $sticky ? 0 : 5000;
+        $flashMessages = [];
+        $allMessages = $this->getSession()->getAllFlashes();
         foreach ($allMessages as $key => $message) {
             if (is_array($message)) {
                 $message = $this->mergeFlashMessages($message);
             }
-            $flashMessages .= '<div class="alert alert-' . $key . '">' . $message . '</div>';
+            $flashMessages[] = [
+                'message' => $message,
+                'type' => $key,
+                'timeout' => $timeout
+            ];
         }
-        \Yii::$app->session->removeAllFlashes();
-        return $flashMessages;
-    }
-
-    /**
-     * merge flash messages
-     * @author Adeyemi Olaoye <yemi@cottacush.com>
-     * @param $messageArray
-     * @return string
-     */
-    private function mergeFlashMessages($messageArray)
-    {
-        $messages = array_values($messageArray);
-        $flashMessage = '';
-        $flashMessageArr = [];
-        foreach ($messages as $message) {
-            if (is_array($message)) {
-                if (strlen($flashMessage) > 0) {
-                    $flashMessage .= '<br/>';
-                }
-                $flashMessage .= $this->mergeFlashMessages($message);
-            } else {
-                $flashMessageArr[] = $message;
-            }
-        }
-
-
-
-        return $flashMessage . implode('<br/>', $flashMessageArr);
+        $this->getSession()->removeAllFlashes();
+        return Html::script('var notifications =' . json_encode($flashMessages));
     }
 
     /**
@@ -249,5 +228,15 @@ class BaseController extends Controller
     public function getModuleUser()
     {
         return $this->module->get('user');
+    }
+
+    /**
+     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
+     * @return int|string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getUserId()
+    {
+        return $this->getModuleUser()->id;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
-use CottaCush\Yii2\Controller\BaseController;
+use app\controllers\BaseController;
 
 /**
  * Class BaseAdminController

@@ -17,11 +17,12 @@ class AdminAsset extends BaseAdminAsset
         'js/theme.min.js',
     ];
     public $depends = [
+        'yii\web\YiiAsset',
+        'CottaCush\Yii2\Assets\AppModuleAsset',
+        'yii\bootstrap\BootstrapAsset',
         'app\assets\FastClickAsset',
         'app\assets\JquerySlimScrollAsset',
-        'CottaCush\Yii2\Assets\FontAwesomeAsset',
-        'yii\web\JqueryAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'app\assets\FontAwesomeAsset',
         'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

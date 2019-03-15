@@ -5,10 +5,12 @@
 
 use app\assets\AdminAsset;
 use app\modules\admin\widgets\ContentHeaderWidget;
+use CottaCush\Yii2\Assets\ToastrNotificationAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 AdminAsset::register($this);
+ToastrNotificationAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
