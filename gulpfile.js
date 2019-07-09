@@ -8,6 +8,7 @@ const gulp = require('gulp'),
     sass = require('gulp-sass'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
+    babel = require("gulp-babel"),
     rimraf = require('rimraf'),
     sourcemaps = require('gulp-sourcemaps'),
     path = require('path'),
@@ -32,8 +33,8 @@ const shouldAddSourcemaps = generalConfig.sourcemaps,
 
 
 /* Declare our gulp tasks */
-gulp.task('build:admin', parallel(series(adminStyles, minifyAdmin), adminImages));
-gulp.task('build:fe', parallel(series(feStyles, minifyFe), feImages));
+gulp.task('build:admin', parallel(series(adminStyles, minifyAdmin), adminImages, buildAdminScripts));
+gulp.task('build:fe', parallel(series(feStyles, minifyFe), feImages, buildFeScripts));
 gulp.task('build', series('build:admin', 'build:fe'));
 gulp.task('default', series('build', watch));
 
@@ -118,19 +119,65 @@ images.description = 'Minify images back into the same (source) folder';
 /**
  * This function minifies images for the admin module
  */
-function adminImages() {
-    return images(adminConfig);
+function adminImages(done) {
+    if (adminConfig.images.shouldMinify) {
+        return images(adminConfig);
+    }
+    done();
 }
 adminImages.description = 'Minify images for the admin module';
 
 /**
  * This function minifies images for the main project
  */
-function feImages() {
-    return images(feConfig);
+function feImages(done) {
+    if (feConfig.images.shouldMinify) {
+        return images(feConfig);
+    }
+    done();
 }
 feImages.description = 'Minify images for the main project';
 
+/**
+ * This function transpiles javascript for the main project
+ */
+function buildFeScripts(done) {
+    if (feConfig.scripts.shouldTranspile) {
+        return buildScripts(feConfig);
+    }
+    done();
+}
+buildFeScripts.description = 'Transpile scripts for the main project';
+
+/**
+ * This function transpiles javascript for the admin module
+ */
+function buildAdminScripts(done) {
+    if (adminConfig.scripts.shouldTranspile) {
+        return buildScripts(adminConfig);
+    }
+    done();
+}
+buildFeScripts.description = 'Transpile scripts for the admin portal';
+
+function buildScripts(config) {
+    return gulp.src(config.scripts.sourceFiles)
+        .pipe(babel({
+            presets: [
+                [
+                    '@babel/preset-env',
+                    {
+                        // Specify minimum browser versions supported. Transpiles to es2015 if no targets are provided
+                        // https://babeljs.io/docs/en/babel-preset-env#how-does-it-work
+                        "targets": {},
+                        "modules": false  // toggle to use strict mode in generated es2015
+                    }
+                ]
+            ]
+        }))
+        .pipe(gulp.dest(config.scripts.destinationDir));
+}
+buildScripts.description = 'Minify scripts back into the same (source) folder';
 
 function watch(done) {
     if (development()) {

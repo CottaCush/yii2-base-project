@@ -16,11 +16,13 @@ var feConfig = {
         ]
     },
     scripts: {
+        shouldTranspile: true, // set to true/false to transpile higher javascript versions
         sourceDir: "./app/web/js",
         sourceFiles: ["./app/web/js/**/*.js"],
-        destinationDir: "./app/web/js"
+        destinationDir: "./app/web/js-dist"
     },
     images: {
+        shouldMinify: false,
         sourceDir: "./app/web/img",
         sourceFiles: "./app/web/img/**/*",
         destinationDir: "./" // save minified images in the same directory
@@ -40,11 +42,13 @@ var adminConfig = {
         ]
     },
     scripts: {
+        shouldTranspile: true, // set to true/false to transpile higher javascript versions
         sourceDir: "./app/web/admin-assets/js",
         sourceFiles: ["./app/web/admin-assets/js/**/*.js"],
-        destinationDir: "./app/web/admin-assets/js"
+        destinationDir: "./app/web/admin-assets/js-dist"
     },
     images: {
+        shouldMinify: false,
         sourceDir: "./app/web/admin-assets/img",
         sourceFiles: "./app/web/admin-assets/img/**/*",
         destinationDir: "./" // save minified images in the same directory
