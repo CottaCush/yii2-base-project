@@ -19,3 +19,4 @@ staging:
     APPLICATION_ENV: "staging"
     SLACK_HOOK_URL: ""
     SLACK_CHANNEL_NAME: ""
+    REPO_URL: ""
