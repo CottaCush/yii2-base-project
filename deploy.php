@@ -4,6 +4,8 @@
  * @author Adegoke Obasa <goke@cottacush.com>
  */
 
+namespace Deployer;
+
 require 'recipe/yii.php';
 
 serverList('deploy/servers.yml');
@@ -11,10 +13,9 @@ serverList('deploy/servers.yml');
 set('writable_dirs', ['app/runtime', 'app/web/assets']);
 set('shared_dirs', ['app/runtime']);
 
-// TODO Add repository url for project
-set('repository', '');
+set('repository', '{{REPO_URL}}');
 
-env('composer_options', 'install --prefer-dist --optimize-autoloader --no-progress --no-interaction');
+set('composer_options', 'install --prefer-dist --optimize-autoloader --no-progress --no-interaction');
 
 /**
  * Run migrations
@@ -27,7 +28,7 @@ task('deploy:run_migrations', function () {
  * Cleanup old releases.
  */
 task('deploy:cleanup', function () {
-    $releases = env('releases_list');
+    $releases = get('releases_list');
 
     $keep = get('keep_releases');
 
@@ -61,19 +62,19 @@ task('deploy:yii2_composer_config', function () {
 
 /** Slack Tasks Begin */
 task('slack:before_deploy', function () {
-    postToSlack('Starting deploy on ' . env('server.name') . '...');
+    postToSlack('Starting deploy on ' . get('server.name') . '...');
 });
 
 task('slack:after_deploy', function () {
-    postToSlack('Deploy to ' . env('server.name') . ' done');
+    postToSlack('Deploy to ' . get('server.name') . ' done');
 });
 
 task('slack:after_migrate', function () {
-    postToSlack('Migrations done on ' . env('server.name'));
+    postToSlack('Migrations done on ' . get('server.name'));
 });
 
 task('slack:before_migrate', function () {
-    postToSlack('Running migrations on ' . env('server.name') . '...');
+    postToSlack('Running migrations on ' . get('server.name') . '...');
 });
 /** Slack Tasks End */
 
@@ -96,10 +97,10 @@ task('deploy', [
 
 function postToSlack($message)
 {
-    $slackHookUrl = env('SLACK_HOOK_URL');
+    $slackHookUrl = get('SLACK_HOOK_URL');
     if (!empty($slackHookUrl)) {
-        runLocally('curl -s -S -X POST --data-urlencode payload="{\"channel\": \"#' . env('SLACK_CHANNEL_NAME') .
-            '\", \"username\": \"Release Bot\", \"text\": \"' . $message . '\"}"' . env('SLACK_HOOK_URL'));
+        runLocally('curl -s -S -X POST --data-urlencode payload="{\"channel\": \"#' . get('SLACK_CHANNEL_NAME') .
+            '\", \"username\": \"Release Bot\", \"text\": \"' . $message . '\"}"' . get('SLACK_HOOK_URL'));
     } else {
         write('Configure the SLACK_HOOK_URL to post to slack');
     }
