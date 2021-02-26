@@ -28,7 +28,7 @@ If you do not have [Composer](http://getcomposer.org/), you may install it by fo
 You can then install this project template using the following command:
 
 ~~~
-composer global require "fxp/composer-asset-plugin:~1.1.1"
+composer global require "fxp/composer-asset-plugin:~1.4"
 composer create-project --prefer-dist cottacush/yii2-base-project new_project
 ~~~
 
