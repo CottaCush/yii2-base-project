@@ -42,4 +42,4 @@ build/coverage
 build/api
 
 # Node.js
-node_modules
+/node_modules

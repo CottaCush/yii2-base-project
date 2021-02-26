@@ -16,7 +16,7 @@ class FontAwesomeAsset extends AssetBundle
         'css/font-awesome.min.css'
     ];
 
-    public $productionCss = [
+    public array $productionCss = [
       'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     ];
 }

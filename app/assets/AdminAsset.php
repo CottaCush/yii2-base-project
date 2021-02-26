@@ -2,6 +2,8 @@
 
 namespace app\assets;
 
+use yii\bootstrap4\BootstrapPluginAsset;
+
 /**
  * Class AdminAsset
  * @package app\assets
@@ -19,10 +21,10 @@ class AdminAsset extends BaseAdminAsset
     public $depends = [
         'yii\web\YiiAsset',
         'CottaCush\Yii2\Assets\AppModuleAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap4\BootstrapAsset',
         'app\assets\FastClickAsset',
         'app\assets\JquerySlimScrollAsset',
         'app\assets\FontAwesomeAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+        BootstrapPluginAsset::class,
     ];
 }

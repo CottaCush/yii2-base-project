@@ -17,16 +17,16 @@ class AddInviteModalWidget extends BaseModalWidget
 {
     public $formMethod = 'post';
     public $formOptions = [];
-    public $label = 'Email Address';
-    public $inviteTagName = 'email[]';
-    public $inputPlaceholder = 'Enter email addresses...';
-    public $tagErrorMsg = 'Please add at least one email address';
-    public $inputErrorMsg = 'You entered an invalid email address';
-    public $helpText = 'Add more invite by separating with a comma(,)';
-    public $selectName = 'role';
-    public $selectPrompt = 'Choose a Role';
-    public $selectItems = [];
-    public $selectErrorMsg = 'Please choose a Role';
+    public string $label = 'Email Address';
+    public string $inviteTagName = 'email[]';
+    public string $inputPlaceholder = 'Enter email addresses...';
+    public string $tagErrorMsg = 'Please add at least one email address';
+    public string $inputErrorMsg = 'You entered an invalid email address';
+    public string $helpText = 'Add more invite by separating with a comma(,)';
+    public string $selectName = 'role';
+    public string $selectPrompt = 'Choose a Role';
+    public array $selectItems = [];
+    public string $selectErrorMsg = 'Please choose a Role';
 
     public function init()
     {

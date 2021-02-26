@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
 use app\assets\AdminAsset;
@@ -8,6 +8,7 @@ use app\modules\admin\widgets\ContentHeaderWidget;
 use CottaCush\Yii2\Assets\ToastrNotificationAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\View;
 
 AdminAsset::register($this);
 ToastrNotificationAsset::register($this);
@@ -40,7 +41,7 @@ ToastrNotificationAsset::register($this);
     <?= $this->render('../elements/sidebar'); ?>
 
     <div class="content-wrapper <?= ArrayHelper::getValue($this->params, 'content-wrapper-class'); ?>">
-        <?= (ArrayHelper::getValue($this->params, 'show-content-header', true)) ? ContentHeaderWidget::widget() : ''; ?>
+        <?= ArrayHelper::getValue($this->params, 'show-content-header', true) ? ContentHeaderWidget::widget() : ''; ?>
         <section class="content">
             <?= $content ?>
         </section>

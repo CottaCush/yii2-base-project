@@ -1,11 +1,12 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
 use app\assets\AdminAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\View;
 
 AdminAsset::register($this);
 ?>

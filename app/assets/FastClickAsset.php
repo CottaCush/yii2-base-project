@@ -17,7 +17,7 @@ class FastClickAsset extends AssetBundle
         'fastclick.js'
     ];
 
-    public $productionJs = [
+    public array $productionJs = [
         'https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js'
     ];
 }

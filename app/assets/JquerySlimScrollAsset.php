@@ -17,7 +17,7 @@ class JquerySlimScrollAsset extends AssetBundle
         'jquery.slimscroll.min.js'
     ];
 
-    public $productionJs = [
+    public array $productionJs = [
         'https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js'
     ];
 

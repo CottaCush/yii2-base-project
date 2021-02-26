@@ -8,11 +8,13 @@ use app\services\DummyServiceInterface;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
+use yii\web\Response;
 
 class SiteController extends BaseController
 {
     /** @var  DummyServiceInterface */
-    protected $dummyService;
+    protected DummyServiceInterface $dummyService;
 
     public function __construct($id, $module, DummyServiceInterface $dummyService, $config = [])
     {
@@ -20,11 +22,11 @@ class SiteController extends BaseController
         parent::__construct($id, $module, $config);
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -35,7 +37,7 @@ class SiteController extends BaseController
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -43,7 +45,7 @@ class SiteController extends BaseController
         ];
     }
 
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [
@@ -56,7 +58,7 @@ class SiteController extends BaseController
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
@@ -66,9 +68,9 @@ class SiteController extends BaseController
         return $this->dummyService->shout("Hello World");
     }
 
-    public function actionLogin()
+    public function actionLogin(): Response|string
     {
-        if (!\Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -81,14 +83,14 @@ class SiteController extends BaseController
         ]);
     }
 
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
 
-    public function actionContact()
+    public function actionContact(): Response|string
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
@@ -101,7 +103,11 @@ class SiteController extends BaseController
         ]);
     }
 
-    public function actionAbout()
+    /**
+     * @return Response|string
+     * @throws ForbiddenHttpException
+     */
+    public function actionAbout(): Response|string
     {
         if ($this->getUser()->isGuest) {
             return $this->getUser()->loginRequired();

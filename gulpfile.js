@@ -12,10 +12,9 @@ const gulp = require('gulp'),
     rimraf = require('rimraf'),
     sourcemaps = require('gulp-sourcemaps'),
     path = require('path'),
-    config = require('./gulpfile-config');
-    feConfig = config.feConfig;
-    adminConfig = config.adminConfig;
-    generalConfig = config.generalConfig;
+    gulpConfig = require('./gulpfile-config');
+portalConfig = gulpConfig.config.portalStyles;
+siteConfig = gulpConfig.config.siteStyles;
 
 
 /* Declare our environments */
@@ -28,77 +27,68 @@ const series = gulp.series,
     parallel = gulp.parallel;
 
 /* Extract some config properties for convenience */
-const shouldAddSourcemaps = generalConfig.sourcemaps,
-    shouldMinify = generalConfig.minify;
+const shouldAddSourcemaps = gulpConfig.sourcemaps,
+    shouldMinify = gulpConfig.minify;
 
 
 /* Declare our gulp tasks */
-gulp.task('build:admin', parallel(series(adminStyles, minifyAdmin), adminImages, buildAdminScripts));
-gulp.task('build:fe', parallel(series(feStyles, minifyFe), feImages, buildFeScripts));
-gulp.task('build', series('build:admin', 'build:fe'));
+gulp.task('build:portal', parallel(series(portalStyles, minifyPortal), images));
+gulp.task('build:site', parallel(series(siteStyles, minifySite), images));
+gulp.task('build', series('build:site', 'build:portal'));
 gulp.task('default', series('build', watch));
 
 /* Describe our gulp tasks */
 gulp.task('build').description = 'Clean out the build folder then compile styles, minify images, and copy assets into the build folder';
-gulp.task('build:admin').description = 'Clean out the build folder in the admin module and build';
-gulp.task('build:fe').description = 'Clean out the build folder in the project root and build';
+gulp.task('build:portal').description = 'Clean out the build folder in the portal module and build';
+gulp.task('build:site').description = 'Clean out the build folder in the project root and build';
 gulp.task('default').description = 'Run the build task and watch for any changes';
 
-/**
- * This function cleans the build directory in the main project
- */
-function cleanFe(done) {
-    rimraf(feConfig.buildDir, done);
-}
-cleanFe.description = 'Cleans the build folder in the project root';
 
-/**
- * This function cleans the build directory for the admin module
- */
-function cleanAdmin(done) {
-    rimraf(adminConfig.buildDir, done);
+function clean(done)
+{
+    rimraf(gulpconfig.buildDir, done);
 }
-cleanAdmin.description = 'Cleans the build folder for the admin module';
+clean.description = 'Cleans the build folder in the project root';
 
-/**
- * This function builds styles in the admin module
- */
-function adminStyles() {
-    return styles(adminConfig);
+function portalStyles()
+{
+    return styles(portalConfig);
 }
 
-/**
- * This function builds styles in the main project
- */
-function feStyles() {
-    return styles(feConfig);
+function siteStyles()
+{
+    return styles(siteConfig);
 }
 
-function styles(config) {
-    let sConfig = config.styles,
+function styles(config)
+{
+    let sConfig = config,
         files = sConfig.sourceFiles,
         source = sConfig.sourceDir,
         dest = sConfig.destinationDir,
         mapsDir = sConfig.mapsDir,
         postcssConfig = sConfig.postcss;
 
-    return compileLess(source, dest, files, mapsDir, postcssConfig);
+    return compileSass(source, dest, files, mapsDir, postcssConfig);
 }
 styles.description = 'Compiles SCSS files to CSS; adds source maps if specified';
 
-function minifyFe(done) {
-    minifyStyles(feConfig);
+function minifySite(done)
+{
+    minifyStyles(siteConfig);
     done();
 }
-minifyFe.description = 'Minify CSS files for the main project';
+minifySite.description = 'Minify CSS files for the main project';
 
-function minifyAdmin(done) {
-    minifyStyles(adminConfig);
+function minifyPortal(done)
+{
+    minifyStyles(portalConfig);
     done();
 }
-minifyAdmin.description = 'Minify CSS files for the admin module';
+minifyPortal.description = 'Minify CSS files for the portal module';
 
-function minifyStyles(config) {
+function minifyStyles(config)
+{
     if (shouldMinify) {
         let dir = config.styles.destinationDir;
         return minifyCSS(dir, dir, false);
@@ -106,9 +96,9 @@ function minifyStyles(config) {
 }
 minifyStyles.description = 'Minify CSS files';
 
-
-function images(config) {
-    let iConfig = config.images,
+function images()
+{
+    let iConfig = gulpConfig.config.images,
         sourceDir = iConfig.sourceDir,
         destDir = iConfig.destinationDir;
 
@@ -116,51 +106,8 @@ function images(config) {
 }
 images.description = 'Minify images back into the same (source) folder';
 
-/**
- * This function minifies images for the admin module
- */
-function adminImages(done) {
-    if (adminConfig.images.shouldMinify) {
-        return images(adminConfig);
-    }
-    done();
-}
-adminImages.description = 'Minify images for the admin module';
-
-/**
- * This function minifies images for the main project
- */
-function feImages(done) {
-    if (feConfig.images.shouldMinify) {
-        return images(feConfig);
-    }
-    done();
-}
-feImages.description = 'Minify images for the main project';
-
-/**
- * This function transpiles javascript for the main project
- */
-function buildFeScripts(done) {
-    if (feConfig.scripts.shouldTranspile) {
-        return buildScripts(feConfig);
-    }
-    done();
-}
-buildFeScripts.description = 'Transpile scripts for the main project';
-
-/**
- * This function transpiles javascript for the admin module
- */
-function buildAdminScripts(done) {
-    if (adminConfig.scripts.shouldTranspile) {
-        return buildScripts(adminConfig);
-    }
-    done();
-}
-buildFeScripts.description = 'Transpile scripts for the admin portal';
-
-function buildScripts(config) {
+function buildScripts(config)
+{
     return gulp.src(config.scripts.sourceFiles)
         .pipe(babel({
             presets: [
@@ -179,10 +126,10 @@ function buildScripts(config) {
 }
 buildScripts.description = 'Minify scripts back into the same (source) folder';
 
-function watch(done) {
+function watch(done)
+{
     if (development()) {
-        var files = [path.join(adminConfig.styles.sourceDir, '**/*.less'), path.join(feConfig.styles.sourceDir, '**/*.less')];
-        gulp.watch(files, styles);
+        gulp.watch(gulpConfig.config.sourceFiles, styles);
     }
     done();
 }
@@ -198,7 +145,8 @@ watch.description = 'Watch relevant files and re-run their tasks (only in develo
  * @param {Array} postcssConfig an array of postcss processors
  * @returns {*} the gulp stream
  */
-function compileLess(sourceDir, destDir, files, mapsDir, postcssConfig) {
+function compileLess(sourceDir, destDir, files, mapsDir, postcssConfig)
+{
     return compileStyles(sourceDir, destDir, files, mapsDir, less, postcssConfig);
 }
 
@@ -211,9 +159,10 @@ function compileLess(sourceDir, destDir, files, mapsDir, postcssConfig) {
  * @param {Array} postcssConfig an array of postcss processors
  * @returns {*} the gulp stream
  */
-function compileSass(sourceDir, destDir, files, mapsDir, postcssConfig) {
+function compileSass(sourceDir, destDir, files, mapsDir, postcssConfig)
+{
     return compileStyles(sourceDir, destDir, files, mapsDir, function () {
-        return sass().on('error', sass.logError);
+        return sass({outputStyle: 'expanded'}).on('error', sass.logError);
     }, postcssConfig);
 }
 
@@ -226,7 +175,8 @@ function compileSass(sourceDir, destDir, files, mapsDir, postcssConfig) {
  * @param {Function} buildFxn the build function to use. could be less or sass functions
  * @param {Array} postcssConfig an array of postcss processors
  */
-function compileStyles(sourceDir, destDir, files, mapsDir, buildFxn, postcssConfig) {
+function compileStyles(sourceDir, destDir, files, mapsDir, buildFxn, postcssConfig)
+{
     return gulp.src(files, {base: sourceDir})
         .pipe(gulpif(shouldAddSourcemaps, sourcemaps.init()))
         .pipe(buildFxn())
@@ -240,7 +190,8 @@ function compileStyles(sourceDir, destDir, files, mapsDir, buildFxn, postcssConf
  * @param {String|Array} source a string or array of string representing the glob match for the source files/folders
  * @param {String} destination the new directory to copy
  */
-function copy(source, destination) {
+function copy(source, destination)
+{
     return gulp.src(source)
         .pipe(gulp.dest(destination));
 }
@@ -253,7 +204,8 @@ function copy(source, destination) {
  * @param {boolean} shouldRename determine whether the new file should be renamed or not
  * @returns {*} the gulp stream
  */
-function minifyCSS(sourceDir, destDir, shouldRename) {
+function minifyCSS(sourceDir, destDir, shouldRename)
+{
     let files = [path.join(sourceDir, '**/*.css'), path.join('!' + sourceDir, '**/*.min.css')];
     return minify(files, destDir, cssmin, shouldRename);
 }
@@ -264,7 +216,8 @@ function minifyCSS(sourceDir, destDir, shouldRename) {
  * @param {string} destDir a string representing the path to the directory where the minified files would be saved
  * @returns {*} the gulp stream
  */
-function minifyImages(sourceDir, destDir) {
+function minifyImages(sourceDir, destDir)
+{
     let files = path.join(sourceDir, '**/*');
     return minify(files, destDir, imagemin, false);
 }
@@ -276,7 +229,8 @@ function minifyImages(sourceDir, destDir) {
  * @param {function} minifyFxn the minify function to use
  * @param {boolean} shouldRename determine whether the new file should be renamed or not
  */
-function minify(source, destDir, minifyFxn, shouldRename) {
+function minify(source, destDir, minifyFxn, shouldRename)
+{
     if ('undefined' === typeof shouldRename) {
         shouldRename = true;
     }
