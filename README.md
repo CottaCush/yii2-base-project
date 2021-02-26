@@ -78,7 +78,7 @@ Make a copy of `.env.sample` to `.env` in the env directory.
 ## Docker
 
 This project is dockerized using the LEMP stack. The stack consists of:
-- PHP 7
+- PHP 8
 - nginx
 
 Inspired by [yii2-dockerized](https://github.com/codemix/yii2-dockerized/blob/master/Dockerfile)
