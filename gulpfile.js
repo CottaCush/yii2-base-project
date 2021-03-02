@@ -12,9 +12,9 @@ const gulp = require('gulp'),
     rimraf = require('rimraf'),
     sourcemaps = require('gulp-sourcemaps'),
     path = require('path'),
-    gulpConfig = require('./gulpfile-config');
-portalConfig = gulpConfig.config.portalStyles;
-siteConfig = gulpConfig.config.siteStyles;
+    gulpConfig = require('./gulpfile-config'),
+    portalConfig = gulpConfig.config.portalStyles,
+    siteConfig = gulpConfig.config.siteStyles;
 
 
 /* Declare our environments */
