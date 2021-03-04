@@ -16,14 +16,14 @@
         "cottacush/yii2-utils":  "^3.0",
         "cottacush/yii2-widgets": "^2.0",
         "cottacush/yii2-user-auth": "^2.0",
-        "yiisoft/yii2-bootstrap4": "^2.0",
-        "squizlabs/php_codesniffer": "^3.5"
+        "yiisoft/yii2-bootstrap4": "^2.0"
     },
     "require-dev": {
         "codeception/codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
+        "squizlabs/php_codesniffer": "^3.5",
         "pdepend/pdepend" : "2.2.4",
         "phploc/phploc": "*",
         "phpmd/phpmd" : "@stable",
