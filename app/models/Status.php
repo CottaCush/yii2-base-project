@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use yii\db\ActiveRecord;
+
 /**
  * This is the model class for table "statuses".
  *
@@ -27,7 +29,7 @@ class Status extends BaseModel
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'statuses';
     }
@@ -35,7 +37,7 @@ class Status extends BaseModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['key', 'label'], 'required'],
@@ -45,11 +47,11 @@ class Status extends BaseModel
     }
 
     /**
-     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
      * @param $statuses
-     * @return array|\yii\db\ActiveRecord[]
+     * @return array
+     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
      */
-    public static function getStatuses($statuses)
+    public static function getStatuses($statuses): array
     {
         return self::find()->where(['IN', '`key`', $statuses])->all();
     }

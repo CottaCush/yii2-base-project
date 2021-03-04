@@ -19,7 +19,7 @@
 
 ## Requirements
 
-The minimum requirement by this project template that your Web server supports PHP 5.5.0.
+The minimum requirement by this project template that your Web server supports PHP 8.0.
 
 ### Install via Composer
 
@@ -28,7 +28,7 @@ If you do not have [Composer](http://getcomposer.org/), you may install it by fo
 You can then install this project template using the following command:
 
 ~~~
-composer global require "fxp/composer-asset-plugin:~1.1.1"
+composer global require "fxp/composer-asset-plugin:~1.4"
 composer create-project --prefer-dist cottacush/yii2-base-project new_project
 ~~~
 
@@ -78,7 +78,7 @@ Make a copy of `.env.sample` to `.env` in the env directory.
 ## Docker
 
 This project is dockerized using the LEMP stack. The stack consists of:
-- PHP 7
+- PHP 8
 - nginx
 
 Inspired by [yii2-dockerized](https://github.com/codemix/yii2-dockerized/blob/master/Dockerfile)

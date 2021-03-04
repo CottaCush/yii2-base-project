@@ -5,8 +5,14 @@ namespace app\controllers;
 use Lukasoppermann\Httpstatus\Httpstatus;
 use Yii;
 use CottaCush\Yii2\Controller\BaseController as UtilsController;
+use yii\base\Action;
+use yii\base\InvalidConfigException;
+use yii\base\Security;
+use yii\console\Request;
 use yii\helpers\Html;
 use yii\web\Response;
+use yii\web\Session;
+use yii\web\User;
 
 /**
  * Class BaseController
@@ -28,12 +34,12 @@ class BaseController extends UtilsController
 
     /**
      * Executed after action
-     * @author Adegoke Obasa <goke@cottacush.com>
-     * @param \yii\base\Action $action
+     * @param Action $action
      * @param mixed $result
      * @return mixed
+     * @author Adegoke Obasa <goke@cottacush.com>
      */
-    public function afterAction($action, $result)
+    public function afterAction($action, mixed $result): mixed
     {
         $result = parent::afterAction($action, $result);
         $this->setSecurityHeaders();
@@ -66,10 +72,10 @@ class BaseController extends UtilsController
      * @param $data
      * @return array
      */
-    public function sendSuccessResponse($data)
+    public function sendSuccessResponse($data): array
     {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        \Yii::$app->response->setStatusCode(200, $this->httpStatuses->getReasonPhrase(200));
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->setStatusCode(200, $this->httpStatuses->getReasonPhrase(200));
 
         return [
             'status' => 'success',
@@ -87,11 +93,11 @@ class BaseController extends UtilsController
      * @param null $data
      * @return array
      */
-    public function sendErrorResponse($message, $code, $httpStatusCode, $data = null)
+    public function sendErrorResponse($message, $code, $httpStatusCode, $data = null): array
     {
 
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        \Yii::$app->response->setStatusCode($httpStatusCode, $this->httpStatuses->getReasonPhrase($httpStatusCode));
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->setStatusCode($httpStatusCode, $this->httpStatuses->getReasonPhrase($httpStatusCode));
 
         $response = [
             'status' => 'error',
@@ -114,10 +120,10 @@ class BaseController extends UtilsController
      * @param int $httpStatusCode
      * @return array
      */
-    public function sendFailResponse($data, $httpStatusCode = 500)
+    public function sendFailResponse($data, $httpStatusCode = 500): array
     {
-        \Yii::$app->response->format = Response::FORMAT_JSON;
-        \Yii::$app->response->setStatusCode($httpStatusCode, $this->httpStatuses->getReasonPhrase($httpStatusCode));
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->response->setStatusCode($httpStatusCode, $this->httpStatuses->getReasonPhrase($httpStatusCode));
 
         return [
             'status' => 'fail',
@@ -132,7 +138,7 @@ class BaseController extends UtilsController
      */
     public function flashError($message)
     {
-        \Yii::$app->session->setFlash('danger', $message);
+        Yii::$app->session->setFlash('danger', $message);
     }
 
     /**
@@ -142,15 +148,15 @@ class BaseController extends UtilsController
      */
     public function flashSuccess($message)
     {
-        \Yii::$app->session->setFlash('success', $message);
+        Yii::$app->session->setFlash('success', $message);
     }
 
     /**
      * Get Yii2 request object
      * @author Adegoke Obasa <goke@cottacush.com>
-     * @return \yii\console\Request|\yii\web\Request
+     * @return Request|\yii\web\Request
      */
-    public function getRequest()
+    public function getRequest(): \yii\web\Request|Request
     {
         return Yii::$app->request;
     }
@@ -158,19 +164,19 @@ class BaseController extends UtilsController
     /**
      * Get Yii2 response object
      * @author Adegoke Obasa <goke@cottacush.com>
-     * @return \yii\console\Request|\yii\web\Response
+     * @return Request|Response
      */
-    public function getResponse()
+    public function getResponse(): Response|Request
     {
         return Yii::$app->response;
     }
 
     /**
      * Get Yii2 session object
+     * @return mixed
      * @author Adegoke Obasa <goke@cottacush.com>
-     * @return mixed|\yii\web\Session
      */
-    public function getSession()
+    public function getSession(): mixed
     {
         return Yii::$app->session;
     }
@@ -178,9 +184,9 @@ class BaseController extends UtilsController
     /**
      * Get Yii2 security object
      * @author Adegoke Obasa <goke@cottacush.com>
-     * @return \yii\base\Security
+     * @return Security
      */
-    public function getSecurity()
+    public function getSecurity(): Security
     {
         return Yii::$app->security;
     }
@@ -200,7 +206,7 @@ class BaseController extends UtilsController
      * @param bool $sticky
      * @return string
      */
-    public function showFlashMessages($sticky = false)
+    public function showFlashMessages($sticky = false): string
     {
         $timeout = $sticky ? 0 : 5000;
         $flashMessages = [];
@@ -222,20 +228,20 @@ class BaseController extends UtilsController
     /**
      * Returns the user for the current module
      * @author Adegoke Obasa <goke@cottacush.com>
-     * @return \yii\web\User null|object
-     * @throws \yii\base\InvalidConfigException
+     * @return User null|object
+     * @throws InvalidConfigException
      */
-    public function getModuleUser()
+    public function getModuleUser(): User
     {
         return $this->module->get('user');
     }
 
     /**
+     * @return int
+     * @throws InvalidConfigException
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
-     * @return int|string
-     * @throws \yii\base\InvalidConfigException
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->getModuleUser()->id;
     }

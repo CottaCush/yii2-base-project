@@ -3,6 +3,7 @@
 namespace app\models;
 
 use cottacush\userauth\models\User as AuthUserCredentials;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "user_credentials".
@@ -21,7 +22,7 @@ class UserCredential extends AuthUserCredentials
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['email', 'password', 'created_at'], 'required'],
@@ -35,7 +36,7 @@ class UserCredential extends AuthUserCredentials
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -48,19 +49,19 @@ class UserCredential extends AuthUserCredentials
         ];
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
         return ($this->status == Status::STATUS_ACTIVE);
     }
 
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getUser()
+    public function getUser(): ActiveQuery
     {
-        return $this->hasOne(AppUser::className(), ['user_auth_id' => 'id']);
+        return $this->hasOne(AppUser::class, ['user_auth_id' => 'id']);
     }
 }

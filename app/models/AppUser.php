@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii\web\IdentityInterface;
 
 /**
@@ -32,7 +33,7 @@ class AppUser extends BaseModel implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'users';
     }
@@ -52,7 +53,7 @@ class AppUser extends BaseModel implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public static function findIdentityByAccessToken($token, $type = null): ?IdentityInterface
     {
         return null;
     }
@@ -61,7 +62,7 @@ class AppUser extends BaseModel implements IdentityInterface
      * Returns an ID that can uniquely identify a user identity.
      * @return string|int an ID that uniquely identifies a user identity.
      */
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }
@@ -69,7 +70,7 @@ class AppUser extends BaseModel implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
+    public function getAuthKey(): int|string
     {
         return $this->user_auth_id;
     }
@@ -77,38 +78,38 @@ class AppUser extends BaseModel implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($authKey): bool
     {
         return $this->user_auth_id === $authKey;
     }
 
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getRole()
+    public function getRole(): ActiveQuery
     {
-        return $this->hasOne(Role::className(), ['key' => 'role_key']);
+        return $this->hasOne(Role::class, ['key' => 'role_key']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getStatusObj()
+    public function getStatusObj(): ActiveQuery
     {
-        return $this->hasOne(Status::className(), ['key' => 'status']);
+        return $this->hasOne(Status::class, ['key' => 'status']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getUserAuth()
+    public function getUserAuth(): ActiveQuery
     {
-        return $this->hasOne(UserCredential::className(), ['id' => 'user_auth_id']);
+        return $this->hasOne(UserCredential::class, ['id' => 'user_auth_id']);
     }
 
 
@@ -116,7 +117,7 @@ class AppUser extends BaseModel implements IdentityInterface
      * Confirm that user account is active
      * @return bool
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->status == Status::VALUE_IS_ACTIVE;
     }
@@ -125,13 +126,13 @@ class AppUser extends BaseModel implements IdentityInterface
      * Confirm that userauth credentials is active
      * @return bool
      */
-    public function isCredentialActive()
+    public function isCredentialActive(): bool
     {
         return $this->userAuth->isActive();
     }
 
 
-    public function getAvatar()
+    public function getAvatar(): string
     {
         return '';
     }

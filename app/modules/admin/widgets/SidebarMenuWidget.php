@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\widgets;
 
+use Exception;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -35,8 +36,9 @@ class SidebarMenuWidget extends Menu
 
     /**
      * @inheritdoc
+     * @throws Exception
      */
-    protected function renderItem($item)
+    protected function renderItem($item): string
     {
         if (isset($item['items'])) {
             $labelTemplate = '<a href="{url}">{label} <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>';
@@ -74,13 +76,17 @@ class SidebarMenuWidget extends Menu
      * Recursively renders the menu items (without the container tag).
      * @param array $items the menu items to be rendered recursively
      * @return string the rendering result
+     * @throws Exception
      */
-    protected function renderItems($items)
+    protected function renderItems($items): string
     {
         $itemsCount = count($items);
         $lines = [];
         foreach ($items as $i => $item) {
-            $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
+            $options = array_merge(
+                $this->itemOptions,
+                ArrayHelper::getValue($item, 'options', [])
+            );
             $tag = ArrayHelper::remove($options, 'tag', 'li');
             $class = [];
             if ($item['active']) {
@@ -114,7 +120,7 @@ class SidebarMenuWidget extends Menu
     /**
      * @inheritdoc
      */
-    protected function normalizeItems($items, &$active)
+    protected function normalizeItems($items, &$active): array
     {
         foreach ($items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
@@ -161,7 +167,7 @@ class SidebarMenuWidget extends Menu
      * @param array $item the menu item to be checked
      * @return boolean whether the menu item is active
      */
-    protected function isItemActive($item)
+    protected function isItemActive($item): bool
     {
         if (isset($item['link']) && is_array($item['link']) && isset($item['link'][0])) {
             $route = $item['link'][0];

@@ -29,6 +29,9 @@ phpunit.phar
 # composer lock file
 composer.lock
 
+# package lock file
+package-lock.json
+
 # Cache files
 cache.properties
 
@@ -42,4 +45,4 @@ build/coverage
 build/api
 
 # Node.js
-node_modules
+/node_modules

@@ -1,0 +1,10 @@
+.text {
+  &-brand {
+    &-primary {
+      color: $brand-primary;
+    }
+  }
+  &-accent {
+    color: $brand-accent
+  }
+}

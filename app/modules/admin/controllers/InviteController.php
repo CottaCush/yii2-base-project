@@ -10,7 +10,11 @@ use app\models\Invite;
 use app\models\Role;
 use app\models\Status;
 use CottaCush\Yii2\Action\UpdateAction;
+use Exception;
+use yii\base\ExitException;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
+use yii\web\Response;
 
 /**
  * Class InviteController
@@ -22,7 +26,11 @@ class InviteController extends BaseAdminController
     const INDEX_URL = '/admin/invite';
     const LOGIN_URL = '/login';
 
-    public function actions()
+    /**
+     * @return array[]
+     * @throws InvalidConfigException
+     */
+    public function actions(): array
     {
         $currentUser = $this->getUserId();
 
@@ -43,11 +51,12 @@ class InviteController extends BaseAdminController
     }
 
     /**
-     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
      * @param null $status
      * @return string
+     * @throws Exception
+     * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
      */
-    public function actionIndex($status = null)
+    public function actionIndex($status = null): string
     {
         $query = Invite::getInvites($status);
         $msg = ($status) ? sprintf('You have no %s invites', $status) :
@@ -79,10 +88,13 @@ class InviteController extends BaseAdminController
     }
 
     /**
+     * @return Response
+     * @throws InvalidConfigException
+     * @throws ExitException
+     * @throws Exception
      * @author Taiwo Ladipo <taiwo.ladipo@cottacush.com>
-     * @return \yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate(): Response
     {
         $this->isPostCheck(self::INDEX_URL);
         $postData = $this->getRequest()->post();

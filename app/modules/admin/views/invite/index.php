@@ -1,7 +1,8 @@
-<?php
+<?php /** @noinspection ALL */
 
 use app\constants\Messages;
 use app\libs\Utils;
+use app\models\Invite;
 use app\widgets\EmptyStateWidget;
 use CottaCush\Yii2\Widgets\ActionButtons;
 use CottaCush\Yii2\Widgets\GridViewWidget;

@@ -11,7 +11,7 @@ use yii\helpers\Html;
  */
 class Utils
 {
-    public static function getStatusHtml($status, $extraClasses = '')
+    public static function getStatusHtml($status, $extraClasses = ''): string
     {
         $status = strtolower($status);
         $statusHypenated = implode('-', explode(' ', $status));

@@ -1,0 +1,14 @@
+.btn {
+  &-brand {
+    &-primary {
+      background-color: $brand-primary;
+      color: $white;
+      border-color: $brand-primary;
+    }
+    &-white {
+      color: $brand-primary;
+      background-color: $white;
+      border-color: $white;
+    }
+  }
+}

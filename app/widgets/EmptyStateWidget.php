@@ -4,6 +4,7 @@ namespace app\widgets;
 
 use app\assets\FontAwesomeAsset;
 use CottaCush\Yii2\Helpers\Html;
+use Exception;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -13,14 +14,17 @@ use yii\helpers\ArrayHelper;
  */
 class EmptyStateWidget extends BaseContentHeaderButton
 {
-    public $icon;
-    public $title;
-    public $description;
-    public $buttonClass = 'btn btn-primary';
-    public $showContentHeader = true;
-    public $showContentHeaderButton = true;
-    public $showButton = true;
+    public string $icon = '';
+    public string $title = '';
+    public string $description = '';
+    public string $buttonClass = 'btn btn-primary';
+    public bool $showContentHeader = true;
+    public bool $showContentHeaderButton = true;
+    public bool $showButton = true;
 
+    /**
+     * @throws Exception
+     */
     public function init()
     {
         parent::init();
@@ -40,7 +44,7 @@ class EmptyStateWidget extends BaseContentHeaderButton
         FontAwesomeAsset::register($this->view);
     }
 
-    public function run()
+    public function run(): void
     {
         echo Html::beginTag('section', ['class' => 'empty-state']);
 

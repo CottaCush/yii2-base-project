@@ -19,7 +19,7 @@ class Role extends BaseModel
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'roles';
     }
@@ -27,7 +27,7 @@ class Role extends BaseModel
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['key', 'label'], 'required'],
