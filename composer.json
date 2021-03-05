@@ -8,7 +8,6 @@
     "require": {
         "php": "~8.0",
         "yiisoft/yii2": "~2.0.40",
-        "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "vlucas/phpdotenv": "^2.2",
         "lukasoppermann/http-status": "^2.0",
